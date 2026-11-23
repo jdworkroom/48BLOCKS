@@ -1,0 +1,1311 @@
+<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><meta name="theme-color" content="#ffffff"><title>48BLOCKS</title><style>@font-face{font-family:"Geist Mono";font-weight:400;font-style:normal;font-display:swap;src:url("fonts/geist-mono-latin-400-normal.woff2") format("woff2")}@font-face{font-family:"Geist Mono";font-weight:700;font-style:normal;font-display:swap;src:url("fonts/geist-mono-latin-700-normal.woff2") format("woff2")}</style><script>try{var t=localStorage.getItem("haru-blocks.theme")||"system";document.documentElement.dataset.theme=t==="dark"||(t==="system"&&matchMedia("(prefers-color-scheme: dark)").matches)?"dark":"light"}catch(e){}</script><style>@font-face{font-family:"Pretendard Variable";font-weight:45 920;font-style:normal;font-display:swap;src:url("fonts/PretendardVariable.woff2") format("woff2-variations"),url("fonts/PretendardVariable.woff2") format("woff2")}</style><style>*{box-sizing:border-box}body{margin:0;background:#f5f5f3;color:var(--ink);font:16px/1.45 "Inter","Malgun Gothic",sans-serif;letter-spacing:-.035em}button,input{font:inherit;color:inherit}button{cursor:pointer;border:0;background:#f1f1ee;border-radius:9px;padding:9px 14px;font-weight:450}button:hover{filter:brightness(.96)}button:focus-visible,input:focus-visible{outline:2.4px solid #5477ab;outline-offset:1px}[hidden]{display:none!important}header,main{max-width:1160px;margin:auto}header{display:flex;align-items:center;gap:12px;color:var(--ink);padding:35px 24px 23px}.logo{display:grid;grid-template-columns:10px 10px;gap:3px;transform:rotate(-7deg)}.logo i{background:var(--ink);height:10px;border-radius:1.6px}.logo i:last-child{opacity:.45}h1{font-size:25px;letter-spacing:-.07em;margin:0}h2{margin:0;font-size:17px}main{padding:0 24px 40px;display:grid;grid-template-columns:minmax(250px,.85fr) minmax(340px,2fr);gap:16px;align-items:start}aside{display:grid;gap:16px;position:sticky;top:16px}.summary,.activities,.sheet{background:var(--paper);border:0.8px solid #e1e2dd;border-radius:19px;padding:24px}.datebox{display:flex;justify-content:space-between;align-items:center;padding:0}.datebox button{font:26px/1 "Pretendard Variable",Pretendard,Arial,"Malgun Gothic",sans-serif;padding:3px 9px;background:transparent}.datebox label{position:relative;font-weight:500;font-size:15px}.datebox input{position:absolute;inset:0;width:100%;opacity:0;cursor:pointer}.datebox input::-webkit-calendar-picker-indicator{position:absolute;inset:0;width:auto;height:auto;cursor:pointer}.legendRow{display:flex;align-items:center;justify-content:space-between}.activities #legend{margin-top:18px;font-size:14px;color:#66685f}.legendRow{gap:10px;padding:7px 0}.legendRow span{flex:1;overflow-wrap:anywhere}.dot{width:12px;height:12px;border-radius:4px;display:inline-block;flex:none}.toolbar{display:flex;align-items:center;justify-content:space-between;gap:6px}.tabs{display:flex;background:#f2f2ee;border-radius:12px;padding:4px;gap:2px}.tabs button{background:transparent;font-size:14px}.tabs button[aria-pressed=true]{background:#f8df49}.tabs span{font-size:18px;vertical-align:-1px;margin-right:3px}#selectMode{display:none;font-size:14px}#hint,#range{font-size:14px;color:#64665f;margin:18px 0 12px}:is(#grid,.preview-grid){position:relative;display:grid;grid-template-columns:32px 1fr 1fr;border-top:0.8px solid #dedfd8;user-select:none}.hour,.cell{border-bottom:0.8px solid #dedfd8;height:34px;display:flex;align-items:center}.hour{font:500 14px/1 "Pretendard Variable",Pretendard,Arial,"Malgun Gothic",sans-serif;color:#65665f}.cell{border-radius:0;border-left:0.8px solid #e2e3dd;justify-content:flex-start;background:#fafbf8;padding:0 10px;font-size:14px;overflow:hidden;var(--paper)-space:nowrap;touch-action:pan-y}.cell:nth-child(3n+1){border-right:0.8px solid #dedfd8}.cell:focus-visible{outline-offset:-3px}.joined{border-left-color:transparent}.selecting .cell{touch-action:none}#selection{pointer-events:none;position:absolute;z-index:2;background:#676e8b33;border:1.6px solid #626c83}.dial{position:relative;max-width:470px;aspect-ratio:1;margin:50px auto}.dial>b{position:absolute;font-size:14px;color:#62645c}.dial>b:nth-child(1){left:50%;transform:translateX(-50%)}.dial>b:nth-child(2){right:0;top:50%;transform:translateY(-50%)}.dial>b:nth-child(3){bottom:0;left:50%;transform:translateX(-50%)}.dial>b:nth-child(4){left:0;top:50%;transform:translateY(-50%)}:is(#ring,.preview-ring){position:absolute;inset:9%;border-radius:50%;display:grid;place-items:center}:is(#ring,.preview-ring)>div{background:var(--paper);width:64%;aspect-ratio:1;border-radius:50%;display:grid;place-content:center;text-align:center}dialog{border:0;border-radius:18px;width:min(400px,94vw);padding:26px}dialog::backdrop{background:#14151280}form>label,#recentWrap label{display:block;font-weight:450;margin:18px 0 8px;font-size:14px}#name{width:100%;border:0.8px solid #c5c7bd;border-radius:8px;padding:10px}#colors,#recent{display:flex;flex-wrap:wrap;gap:8px;align-items:center}.swatch,#custom{border:0.8px solid #0002;border-radius:50%;width:30px;height:30px;padding:0}.swatch[aria-pressed=true]{outline:1.6px solid var(--ink);outline-offset:2px}#recent button{display:flex;align-items:center;gap:6px;font-size:14px;overflow-wrap:anywhere}footer{display:flex;gap:8px;justify-content:flex-end;margin-top:24px}#del{margin-right:auto;color:#973e39;background:transparent}#save{background:var(--ink);color:var(--paper)}@media(pointer:coarse){#selectMode{display:block}#selectMode[aria-pressed=true]{background:var(--ink);color:var(--paper)}}@media(max-width:720px){header{padding:18px 15px 12px}main{padding:0 12px 24px;display:flex;flex-direction:column;gap:10px}aside{display:contents}.sheet,.summary,.activities{width:100%;padding:18px;border-radius:15px}.activities{order:3}.cell,.hour{height:37px}.sheet{padding:15px}.tabs button{padding:7px 10px}.dial{margin:25px auto}}
+
+body{background:#e8e8e6;color:var(--ink);padding:clamp(10px,3.4vw,52px) 16px}.page{max-width:1180px;margin:auto;background:var(--paper);border-radius:8px;padding:0 clamp(18px,3vw,46px) 36px}header{max-width:none;padding:clamp(28px,5vw,64px) 0 28px;display:flex;align-items:baseline;justify-content:space-between;gap:16px;border-bottom:0.8px solid #aaa9a4}h1{font-size:clamp(40px,5.2vw,76px);line-height:1.08;letter-spacing:-.085em;font-weight:400}.transfer{display:flex;gap:14px;flex-wrap:wrap}.transfer button{font-size:14px;background:transparent;border-radius:0;padding:5px 0;border-bottom:0.8px solid #878783;font-weight:450}main{max-width:none;padding:34px 0 0;grid-template-columns:minmax(215px,1fr) minmax(315px,2.3fr);gap:clamp(24px,4vw,60px)}aside{gap:30px}.summary,.activities,.sheet{background:transparent;border:0;border-radius:0;padding:0}.datebox,.activities h2,.toolbar{border-bottom:0.8px solid #aaa9a4;padding:0 0 12px}.datebox button{font-size:24px}.datebox label{font-weight:450}.activities h2{font-size:16px;font-weight:400}.activities #legend{margin-top:8px}.legendRow{border-bottom:0.8px solid #deded9}.dot,.swatch,#custom{border-radius:1.6px}.tabs{background:transparent;padding:0;gap:3px;border-radius:0}.tabs button{border-radius:2.4px;background:transparent}.tabs button[aria-pressed=true]{background:#e4e4df;box-shadow:inset 0 -2px var(--ink)}.cell{background:#efefec}.hour{font-variant-numeric:tabular-nums}.dial :is(#ring,.preview-ring)>div{background:var(--paper)}#notice{font-size:14px;margin:12px 0 0}dialog{background:var(--paper);border-radius:6px}dialog button{border-radius:2.4px}@media(max-width:720px){body{padding:8px}.page{padding:0 14px 24px}header{align-items:flex-start;flex-wrap:wrap;padding:26px 0 18px}.transfer{gap:12px}main{padding-top:18px;gap:20px}.summary,.activities,.sheet{padding:0}.datebox{padding-bottom:12px}.toolbar{padding-bottom:8px}}
+
+body{background:var(--paper);padding:0 clamp(16px,4vw,60px)}.page{border:0;border-radius:0;background:transparent;padding:0 0 36px}.toolbar{display:grid;grid-template-columns:1fr auto 1fr;align-items:center}.tabs{grid-column:2;align-items:center}.tabs button{width:44px;height:44px;display:grid;place-items:center;padding:0}#selectMode{grid-column:3;justify-self:end;padding:6px;font-size:13px}header,.toolbar,.activities h2,.datebox{border-bottom:1.6px solid #888883}:is(#grid,.preview-grid){border-top:1.6px solid #9a9a94}.hour,.cell,.legendRow{border-bottom:1.6px solid #d0d0cb}.cell{border-left:1.6px solid #d0d0cb}.cell.joined{border-left-color:transparent}.cell:nth-child(3n+1){border-right:1.6px solid #d0d0cb}
+
+body,dialog{background:var(--paper)}.datebox label{font-size:clamp(23px,2.3vw,30px);font-weight:400;letter-spacing:-.055em;font-variant-numeric:tabular-nums}.datebox:focus-within label{outline:1.6px solid var(--ink)}.tabs button,.tabs button[aria-pressed=true]{box-shadow:none;background:transparent}.tabs button{color:#999}.tabs button[aria-pressed=true]{color:#b66043}.tabs button:hover{background:#f4f4f2}.cell{background:var(--paper)}.hour{color:var(--ink)}header,.activities h2,.datebox,.transfer button,.legendRow{border-color:var(--ink)}.toolbar{border-bottom:0}:is(#grid,.preview-grid){border-block:2.4px solid var(--ink)}.hour,.cell{border-bottom:1.6px solid var(--ink)}:is(#grid,.preview-grid)>:nth-last-child(-n+3){border-bottom:0}:is(#grid,.preview-grid) .cell{border-left:0;border-right:0}.sheet:has(:is(#clock,.preview-clock):not([hidden])) .toolbar{border-bottom:1.6px solid var(--ink)}
+
+body{font-family:"Pretendard Variable",Pretendard,Arial,"Malgun Gothic",sans-serif;color:var(--ink);letter-spacing:-.025em}h1{font-weight:500;letter-spacing:-.065em;line-height:1}.datebox label{font-weight:400;letter-spacing:-.055em}.hour,.legendRow b{font-weight:400}header{border-bottom-color:var(--ink)}.tabs button,.tabs button:hover,.tabs button[aria-pressed=true]:hover{background:transparent;filter:none}.tabs button[aria-pressed=true]{color:var(--ink);background:transparent}.tabs button:focus-visible{outline:1.6px solid var(--ink)}.tabs button:focus:not(:focus-visible){outline:0}:is(#grid,.preview-grid) .cell.recorded{border:0}:is(#grid,.preview-grid) .cell.recorded + .cell{border-left-color:transparent}:is(#grid,.preview-grid) .cell.recorded{position:relative;z-index:1}#selection{inset:0;background:transparent;border:0}#selection i{position:absolute;display:block;background:var(--sel);pointer-events:none}
+
+:is(#ring,.preview-ring){container-type:inline-size}.chartLabel{position:absolute;transform:translate(-50%,-50%) rotate(var(--tilt,0deg));max-width:38%;background:transparent;border:0;padding:0 1px;border-radius:0;font-size:clamp(12px,3.8cqi,16px);line-height:1.1;font-weight:400;text-align:center;var(--paper)-space:nowrap;overflow:hidden;text-overflow:ellipsis}.chartLabel.narrow{max-width:22%;font-size:clamp(10px,3cqi,13px)}.chartLabel:hover{filter:none}
+
+body,header,dialog,input,button,.datebox label,.hour,.dial>b,#range,#del,#name::placeholder{color:var(--ink)}
+header,.datebox{border-bottom:2.4px solid var(--ink)}
+.hour{font-size:18px;font-weight:550}
+.dial>b{font-size:17px;font-weight:500}
+.tabs button,.tabs button[aria-pressed=true]{border-radius:0}
+.tabs button[aria-pressed=true]{color:var(--ink)}
+.transfer{gap:5px}
+.transfer button{padding:5px 9px;border:0;border-radius:0;background:var(--ink);color:var(--paper);font-size:13px;line-height:1.25;font-weight:400}
+#name{border:1.6px solid var(--ink)}
+#save,#selectMode[aria-pressed=true]{background:#e4e4df;color:var(--ink)}
+
+main{display:flex;flex-direction:column;align-items:stretch;gap:16px}
+.summary,.sheet{width:100%}.datebox{justify-content:center;gap:clamp(12px,4vw,40px)}
+.page>.transfer{justify-content:flex-end;margin-top:24px}
+#editor{border:2.4px solid var(--ink);border-radius:0;max-height:90vh;max-height:90dvh;overflow:auto}
+#editor :is(button,input,.dot){border-radius:0}
+#editor #name,#editor footer button,#editor .swatch,#editor #custom{border:1.6px solid var(--ink)}
+#editor footer button{background:transparent;color:var(--ink)}
+#editor #save{background:var(--ink);color:var(--paper)}
+#recent .activityTag{display:inline-flex;align-items:stretch;max-width:100%;border:1.6px solid var(--ink)}
+#recent button{min-width:0;background:transparent;color:var(--ink);padding:5px 8px}
+#recent .removeTag{flex:none;padding:4px 8px;font-size:19px;line-height:1}
+#recent button:focus-visible{outline:1.6px solid var(--ink);outline-offset:-3px}
+
+:is(#grid,.preview-grid){-webkit-user-select:none;-webkit-touch-callout:none}@media(any-pointer:coarse){#selectMode{display:block}}
+
+.dayHeader{display:flex;align-items:center;justify-content:space-between;border:0;padding:clamp(20px,4vw,50px) 0 20px}
+.dayHeader h1{margin:0;font-size:clamp(58px,16vw,112px);line-height:1;letter-spacing:-.065em;text-align:left}
+.dayPicker{display:inline-block;position:relative;cursor:pointer}.dayPicker:focus-within{outline:1.6px solid var(--ink);outline-offset:4px}
+.dayPicker input{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:pointer}
+.dayPicker input::-webkit-calendar-picker-indicator{position:absolute;inset:0;width:auto;height:auto;cursor:pointer}
+main{padding-top:0}.page{padding-bottom:calc(96px + env(safe-area-inset-bottom,0px))}
+.bottomBar{position:fixed;z-index:5;inset:auto 0 0;display:flex;justify-content:center;border-top:1.6px solid var(--ink);background:var(--paper);padding:5px 0 calc(5px + env(safe-area-inset-bottom,0px))}
+
+.bottomBar{padding:6.5px 0 calc(6.5px + env(safe-area-inset-bottom,0px))}
+.bottomBar .tabs{display:grid;grid-template-columns:repeat(3,1fr);align-items:center;justify-items:center;width:min(100%,480px);gap:0;padding:0}
+.bottomBar .tabs button{width:100%;height:57px}.bottomBar svg{width:27.2px;height:27.2px}
+#settings{padding-top:clamp(24px,6vw,64px)}#settings h2{font-size:clamp(28px,5vw,52px);margin-bottom:22px}#settings .transfer{gap:8px}
+
+:root{--paper:#fff}body,.page,.bottomBar{background:var(--paper)}.bottomBar .tabs{background:transparent}.bottomBar{padding-bottom:calc(12px + env(safe-area-inset-bottom,0px))}
+#settings{max-width:760px;margin:0 auto;width:100%;padding:clamp(28px,5vw,60px) 0}
+#settings h2{line-height:1.1;margin:0 0 32px}
+.settingGroup{border-top:1.6px solid var(--ink);padding:18px 0 24px}.settingGroup h3{font-size:17px;margin:0 0 12px}.settingGroup h4{font-size:15px;margin:0}.settingGroup p{margin:4px 0 0;line-height:1.6;font-size:14px;word-break:keep-all}
+.settingAction{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:16px;align-items:center;padding:14px 0}.settingAction+.settingAction{border-top:.8px solid var(--line2)}.settingAction button{background:var(--ink);color:var(--paper);border-radius:0;min-height:40px;padding:8px 12px;font-size:14px}
+
+html,#editor{scrollbar-width:none}html::-webkit-scrollbar,body::-webkit-scrollbar,#editor::-webkit-scrollbar{display:none}
+:is(#table,.preview-table),:is(#clock,.preview-clock){touch-action:pan-y}
+:is(#ring,.preview-ring){outline:1.6px solid var(--ink)}
+dialog#editor{inset:0;margin:0;width:100%;max-width:none;height:100%;height:100dvh;max-height:none;border:0;padding:0;background:var(--paper);overscroll-behavior:contain}
+html:has(#editor[open]){overflow:hidden}
+#editor form{box-sizing:border-box;margin:0 auto;width:min(100%,760px);min-height:100%;padding:calc(24px + env(safe-area-inset-top,0px)) clamp(18px,4vw,48px) calc(24px + env(safe-area-inset-bottom,0px))}
+#editor #range{margin-top:0}
+
+.dayStage{position:relative;overflow-x:clip}.dayPreview{position:absolute;inset:0 0 auto;pointer-events:none}.dayStage.sliding .page{will-change:transform}.dayPreview .cell{pointer-events:none}
+
+.dayStage.sliding,.dayStage.sliding .page{background:var(--paper)}.dayPreview{width:100%;margin-inline:auto}.cell{-webkit-tap-highlight-color:transparent}.cell:hover,.cell:active{filter:none}
+
+#calendar{max-width:640px;margin:0 auto;padding:24px 0}.monthBar{display:flex;align-items:center;justify-content:space-between;margin-bottom:9px}.monthBar h2{font-size:clamp(28px,6vw,44px)}.monthBar button{background:none;font-size:24px;padding:4px 15px}.weekNames,#monthDays{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));text-align:left}.weekNames{font-size:clamp(17.82px,5.049vw,31.68px);padding:4px 0;border-bottom:1.6px solid}.calDate{font-size:clamp(20.7px,5.94vw,36px);font-weight:650;position:relative;background:none;border-radius:0;min-height:32px;padding:4px;text-align:left;line-height:1.25}.calDate[aria-pressed=true]{background:var(--ink);color:var(--paper)}.calDate.hasTasks::after{content:"";display:block;position:absolute;bottom:3px;left:4px;width:4px;height:4px;background:currentColor}.agenda{border-top:1.6px solid;margin-top:18px;padding-top:18px}.agenda h3{margin:0 0 14px}#todoForm,.taskRow{display:flex;align-items:center;gap:8px}#todoText{flex:1;min-width:0;padding:10px;border:1.6px solid;border-radius:0}#todoForm button{background:var(--ink);color:var(--paper);border-radius:0}.taskRow{border-bottom:0;padding:8px 0}.taskRow label{flex:1;display:flex;align-items:center;gap:8px;overflow-wrap:anywhere}.taskRow input:checked+span{text-decoration:line-through}.taskRow button{background:none}#todoList{padding:0;list-style:none}
+
+.monthBar h2{display:flex;align-items:baseline;margin-right:auto;gap:.3em;letter-spacing:-.045em;font-size:clamp(36px,10.5vw,72px);font-weight:700}
+.monthBar h2 small{font-size:1em;letter-spacing:inherit;font-weight:700}
+.dayHeader h1{font-weight:700}.agendaHead h3{font-weight:600}.weekNames{font-weight:700}
+.cell.recorded{font-size:16px}
+.agendaHead{display:flex;align-items:center;justify-content:space-between}.agendaHead h3{margin:0;font-size:22px}
+#addTodo{display:grid;place-items:center;width:44px;height:44px;padding:0;border:0;border-radius:0;background:transparent;color:var(--ink);font-size:30px;line-height:1}
+#todoForm:not([hidden]){margin-top:8px}
+.taskRow{border:0}.taskRow label{min-height:40px}
+.taskRow input[type=checkbox]{appearance:none;-webkit-appearance:none;box-sizing:border-box;width:18px;height:18px;flex:0 0 18px;margin:0;border:1.6px solid var(--ink);border-radius:0;background:var(--paper);display:grid;place-content:center}
+.taskRow input:checked{background:var(--ink)}.taskRow input:checked::after{content:"";width:8px;height:4px;border:solid var(--paper);border-width:0 0 2px 2px;transform:translateY(-1px) rotate(-45deg)}
+
+html,body,#editor{touch-action:pan-x pan-y}
+
+.weekNames span{padding-left:4px}
+
+#settings h2,#settings h3,#settings h4{font-weight:500}
+
+/* bottom bar v2 */
+.page{padding-bottom:calc(104px + env(safe-area-inset-bottom,0px))}
+.bottomBar{border-top:1px solid var(--ink);padding:4px 0 calc(16px + env(safe-area-inset-bottom,0px))}
+.bottomBar .tabs{width:min(100%,440px)}
+.bottomBar .tabs button{position:relative;height:56px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:0;color:#8c8c88;transition:color .15s ease}
+.bottomBar .tabs button::before{content:"";position:absolute;top:-1px;left:50%;width:28px;height:3px;background:var(--ink);transform:translateX(-50%) scaleX(0);transition:transform .18s ease}
+.bottomBar .tabs button[aria-pressed=true]{color:var(--ink)}
+.bottomBar .tabs button[aria-pressed=true]::before{transform:translateX(-50%) scaleX(1)}
+.bottomBar svg{width:24px;height:24px;flex:none}
+.bottomBar .tabs .todayNum{font-size:21px;line-height:1;font-weight:700;letter-spacing:-.06em;font-variant-numeric:tabular-nums;margin:0;vertical-align:baseline}
+@media(hover:hover){.bottomBar .tabs button:hover{color:var(--hover)}}
+.bottomBar .tabs button:focus-visible{outline:1.6px solid var(--ink);outline-offset:-4px}
+@media(prefers-reduced-motion:reduce){.bottomBar .tabs button,.bottomBar .tabs button::before{transition:none}}
+
+:root{--paper:#fff;--ink:#000;--sel:#10101029;--line2:#aaa;--hover:#3a3a38;color-scheme:light}
+html[data-theme=dark]{--paper:#121212;--ink:#ededea;--sel:#ffffff2e;--line2:#4a4a48;--hover:#c8c8c4;color-scheme:dark}
+#name,#todoText{background:transparent}
+.segmented{display:flex;border:1.6px solid var(--ink)}
+.settingAction .segmented button{background:transparent;color:var(--ink);min-height:38px;padding:6px 12px;font-size:14px;border-radius:0;white-space:nowrap}
+.settingAction .segmented button+button{border-left:1.6px solid var(--ink)}
+.settingAction .segmented button[aria-checked=true]{background:var(--ink);color:var(--paper)}
+
+/* calendar v2 — Stendig-like */
+#calendar .weekNames,#calendar #monthDays{column-gap:0}
+#calendar .weekNames{font-size:clamp(26px,9.6vw,62px);font-weight:600;line-height:.95;letter-spacing:-.055em;padding:6px 0 4px}
+#calendar .weekNames span{padding-left:0}
+#calendar .calDate{font-size:clamp(26px,9.6vw,62px);font-weight:600;line-height:.95;letter-spacing:-.04em;font-variant-numeric:tabular-nums;font-feature-settings:"tnum";min-height:0;padding:0 0 .04em;text-align:left;white-space:nowrap;overflow:visible}
+#calendar .calDate[aria-pressed=true]{background:var(--ink);color:var(--paper)}
+#calendar .calDate.hasTasks::after{content:none;display:none}
+
+/* Geist Mono for numerals */
+:root{--mono:"Geist Mono",ui-monospace,"SFMono-Regular",Menlo,monospace}
+#calendar .weekNames,#calendar .calDate{font-family:var(--mono);font-weight:700;font-size:clamp(25px,9vw,58px);letter-spacing:-.06em;line-height:1}
+.dayHeader h1{font-family:var(--mono);font-weight:700;letter-spacing:-.05em;font-size:15px}
+.hour,.dial>b{font-family:var(--mono);font-weight:700;letter-spacing:-.04em}
+.hour{font-size:16px}
+.bottomBar .tabs .todayNum{font-family:var(--mono);font-weight:700;font-size:20px;letter-spacing:-.06em}
+
+/* blocks sit on top of the rules */
+:is(#grid,.preview-grid) .cell.recorded{box-shadow:0 -1.6px 0 var(--c)}
+:is(#grid,.preview-grid) .cell.recorded:is([data-i="0"],[data-i="1"]){box-shadow:0 -2.4px 0 var(--c)}
+:is(#grid,.preview-grid) .cell.recorded:is([data-i="46"],[data-i="47"]){box-shadow:0 -1.6px 0 var(--c),0 2.4px 0 var(--c)}
+/* popup */
+dialog#alertBox{width:min(360px,88vw);padding:24px;border:2.4px solid var(--ink);border-radius:0;background:var(--paper);color:var(--ink)}
+#alertBox p{margin:0;font-size:15px;line-height:1.6;word-break:keep-all}
+.alertActions{display:flex;justify-content:flex-end;margin-top:20px}
+#alertBox button{border-radius:0;background:var(--ink);color:var(--paper);min-height:40px;padding:8px 18px;font-size:14px}
+/* small month title */
+.monthBar h2{font-size:22px;font-family:var(--mono);font-weight:700;letter-spacing:-.02em}
+.monthBar h2 small{font-family:inherit;font-weight:600}
+.monthBar button{font-size:20px;padding:4px 12px}
+
+/* grain */
+body::after{content:"";position:fixed;inset:0;z-index:20;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1.4 -.3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:180px 180px;opacity:.14;mix-blend-mode:multiply}
+html[data-theme=dark] body::after{opacity:.16;mix-blend-mode:screen;filter:invert(1)}
+
+/* editor v2 — bottom sheet */
+#heading:focus{outline:0}
+.srOnly{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+dialog#editor{inset:auto 0 0 0;top:auto;bottom:0;margin:0 auto;width:100%;max-width:560px;height:auto;max-height:min(640px,82dvh);border:0;border-top:2.4px solid var(--ink);border-radius:0;padding:0;background:var(--paper);color:var(--ink);box-shadow:0 -10px 30px rgba(0,0,0,.1);overflow:hidden}
+dialog#editor::backdrop{background:transparent}
+#editor form{display:flex;flex-direction:column;width:100%;min-height:0;max-height:inherit;margin:0;padding:0}
+#editor .sheetHandle{flex:none;width:36px;height:4px;background:var(--ink);margin:8px auto 0}
+#editor .sheetBody{flex:1;min-height:0;overflow:auto;padding:12px 20px 18px;scrollbar-width:none}
+#editor .sheetHead{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+#editor #range{margin:0;font-family:var(--mono);font-weight:700;font-size:24px;letter-spacing:-.05em;color:var(--ink)}
+#editor #duration{font-size:14px;color:#a0a09c}
+html:not([data-theme=dark]) #editor #duration{color:#555}
+#editor .steppers{display:flex;gap:20px;margin-top:12px}
+#editor .stepper{display:flex;align-items:center;gap:6px}
+#editor .stepper span{font-size:13px;font-weight:500;min-width:16px;margin-right:4px}
+#editor .stepper button{width:44px;height:44px;padding:0;border:1.6px solid var(--ink);background:var(--paper);color:var(--ink);font-size:20px;border-radius:0}
+#editor .stepper button:disabled{opacity:.3;cursor:default}
+#editor .sheetRule{border:0;border-top:1.6px solid var(--ink);margin:16px 0 14px}
+#editor .fieldLabel{display:block;font-size:13px;font-weight:500;margin:0 0 8px}
+#editor label.fieldLabel{margin-top:16px}
+#recentWrap label{display:none}
+#editor #recent{display:flex;flex-wrap:wrap;gap:8px}
+#editor #recent .chip{height:40px;padding:0 14px;border:1.6px solid var(--ink);background:var(--paper);color:var(--ink);font-size:15px;font-weight:400;border-radius:0;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+#editor #recent .chip[aria-pressed=true]{background:var(--ink);color:var(--paper)}
+#recentNote{display:flex;align-items:center;justify-content:space-between;margin:8px 0 0;font-size:13px}
+#recentNote button{background:transparent;border:0;padding:6px 0;text-decoration:underline;font-size:13px;color:var(--ink)}
+#editor #name{height:48px;border:1.6px solid var(--ink);border-radius:0;padding:0 12px;font-size:16px;background:var(--paper);color:var(--ink)}
+#editor #name:focus{outline:0;border-width:2.4px;padding:0 11.2px}
+#suggest{list-style:none;margin:8px 0 0;padding:0;border:1.6px solid var(--ink)}
+#suggest li+li{border-top:1.6px solid var(--line2)}
+#suggest button{width:100%;height:44px;display:flex;align-items:center;gap:10px;border:0;border-radius:0;background:var(--paper);color:var(--ink);padding:0 12px;font-size:15px;text-align:left;font-weight:400}
+#suggest button span{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#suggest .dot{width:14px;height:14px;border-radius:0}
+#suggest .plus{flex:none;width:14px;text-align:center;font-size:18px;line-height:1}
+#suggest small{font-size:12px;color:#a0a09c}
+html:not([data-theme=dark]) #suggest small{color:#555}
+#editor .colorHead{display:flex;align-items:baseline;justify-content:space-between;margin:16px 0 8px}
+#editor .colorHead .fieldLabel{margin:0}
+#customBtn{background:transparent;border:0;padding:4px 0;font-size:13px;text-decoration:underline;color:var(--ink);border-radius:0}
+#editor #colors{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px}
+#editor #colors .swatch{width:auto;height:44px;border:0;border-radius:0;padding:0}
+#editor #colors .swatch[aria-pressed=true]{outline:2.4px solid var(--ink);outline-offset:2px}
+#editor .customWrap{position:relative;display:inline-block}
+#editor #custom{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;border:0;padding:0;border-radius:0;cursor:pointer;font-size:16px;-webkit-appearance:none;appearance:none}
+#editor footer{flex:none;display:flex;gap:8px;margin:0;padding:12px 20px calc(16px + env(safe-area-inset-bottom,0px));border-top:1.6px solid var(--ink);background:var(--paper)}
+#editor footer button{height:52px;border:1.6px solid var(--ink);background:var(--paper);color:var(--ink);font-size:16px;border-radius:0;margin:0}
+#editor footer #del{width:52px;padding:0;display:grid;place-items:center}
+#editor footer #cancel{padding:0 20px}
+#editor footer #save{flex:1;background:var(--ink);color:var(--paper);font-weight:500}
+#editor footer #save:disabled{background:#e4e4df;border-color:#e4e4df;color:#6b6b66;cursor:default}
+html[data-theme=dark] #editor footer #save:disabled{background:#2a2a28;border-color:#2a2a28;color:#8c8c88}
+#toast{position:fixed;z-index:30;left:16px;right:16px;bottom:calc(92px + env(safe-area-inset-bottom,0px));max-width:528px;margin:0 auto;height:52px;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:0 6px 0 16px;background:var(--ink);color:var(--paper);font-size:15px}
+#toast[hidden]{display:none}
+#toast span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#toast button{flex:none;height:44px;padding:0 12px;border:0;background:transparent;color:var(--paper);font-size:15px;font-weight:500;text-decoration:underline;border-radius:0}
+
+/* todo sheet + colour blocks */
+dialog#todoSheet{inset:auto 0 0 0;top:auto;bottom:0;margin:0 auto;width:100%;max-width:560px;height:auto;max-height:min(640px,82dvh);border:0;border-top:2.4px solid var(--ink);border-radius:0;padding:0;background:var(--paper);color:var(--ink);box-shadow:0 -10px 30px rgba(0,0,0,.1);overflow:hidden}
+dialog#todoSheet::backdrop{background:#0000001f}
+#todoSheet form{display:flex;flex-direction:column;width:100%;max-height:inherit;margin:0;padding:0}
+#todoSheet .sheetHandle{flex:none;width:36px;height:4px;background:var(--ink);margin:8px auto 0}
+#todoSheet .sheetBody{flex:1;min-height:0;overflow:auto;padding:14px 20px 18px}
+#todoSheet .sheetHead{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+#todoSheet h2{margin:0;font-size:22px;font-weight:600}
+#todoSheet h2:focus{outline:0}
+#todoDate{font-family:var(--mono);font-weight:700;font-size:15px;letter-spacing:-.04em}
+#todoSheet .fieldLabel{display:block;font-size:13px;font-weight:500;margin:16px 0 8px}
+#todoText{width:100%;height:48px;box-sizing:border-box;border:1.6px solid var(--ink);border-radius:0;padding:0 12px;font-size:16px;background:var(--paper);color:var(--ink)}
+#todoText:focus{outline:0;border-width:2.4px;padding:0 11.2px}
+#todoColors{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px}
+#todoColors .swatch{width:auto;height:44px;border:0;border-radius:0;padding:0}
+#todoColors .swatch[aria-pressed=true]{outline:2.4px solid var(--ink);outline-offset:2px}
+#todoSheet footer{flex:none;display:flex;gap:8px;margin:0;padding:12px 20px calc(16px + env(safe-area-inset-bottom,0px));border-top:1.6px solid var(--ink);background:var(--paper)}
+#todoSheet footer button{height:52px;border:1.6px solid var(--ink);background:var(--paper);color:var(--ink);font-size:16px;border-radius:0;margin:0}
+#todoSheet footer #todoDel{width:52px;padding:0;display:grid;place-items:center}
+#todoSheet footer #todoCancel{padding:0 20px}
+#todoSheet footer #todoSave{flex:1;background:var(--ink);color:var(--paper);font-weight:500}
+#todoSheet footer #todoSave:disabled{background:#e4e4df;border-color:#e4e4df;color:#6b6b66;cursor:default}
+html[data-theme=dark] #todoSheet footer #todoSave:disabled{background:#2a2a28;border-color:#2a2a28;color:#8c8c88}
+#todoList{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;margin:14px 0 0;padding:0;list-style:none}
+.todoBlock{position:relative;display:flex;align-items:flex-start;gap:8px;min-height:72px;box-sizing:border-box;padding:10px 6px 10px 10px;color:#000}
+.todoBlock.noColor{background:#efefec}
+html[data-theme=dark] .todoBlock.noColor{background:#2a2a28;color:var(--ink)}
+.todoBlock input[type=checkbox]{color:inherit;appearance:none;-webkit-appearance:none;flex:0 0 18px;width:18px;height:18px;margin:2px 0 0;border:1.6px solid currentColor!important;border-radius:0;background:transparent;display:grid;place-content:center;cursor:pointer}
+.todoBlock input:checked{background:currentColor}
+.todoBlock input:checked::after{content:"";width:8px;height:4px;border:solid #fff;border-width:0 0 2px 2px;transform:translateY(-1px) rotate(-45deg)}
+html[data-theme=dark] .todoBlock.noColor input:checked::after{border-color:#121212}
+.todoBlock .todoText{flex:1;min-width:0;align-self:flex-start;margin-top:1px;background:transparent;border:0;border-radius:0;padding:0;text-align:left;font-size:15px;font-weight:400;line-height:1.35;color:inherit;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:anywhere}
+.todoBlock .todoRemove{flex:none;width:28px;height:28px;margin:-4px 0 0;padding:0;border:0;border-radius:0;background:transparent;color:inherit;font-size:18px;line-height:1}
+.todoBlock.done{opacity:1}
+.todoBlock.done .todoText{text-decoration:line-through}
+.todoBlock :is(.todoText,.todoRemove):focus-visible{outline:1.6px solid currentColor;outline-offset:2px}
+
+/* todo blocks v2 + timetable block labels */
+#todoList li{display:flex}
+.todoBlock{flex:1;display:grid;place-items:center;min-height:72px;padding:10px 12px;border:0;border-radius:0;font-family:"Pretendard Variable",Pretendard,sans-serif;font-size:15px;font-weight:400;line-height:1.35;text-align:center;color:#000;touch-action:manipulation;-webkit-user-select:none;user-select:none;cursor:pointer;transition:opacity .3s ease .22s}
+.todoBlock:hover{filter:none}
+.todoBlock span{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:anywhere}
+.todoBlock.finishing{opacity:0}
+.todoBlock.finishing span{text-decoration:line-through;text-decoration-thickness:1.6px}
+.todoBlock:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+@media(prefers-reduced-motion:reduce){.todoBlock,.todoBlock span{transition:none}}
+.blockLabel{position:absolute;z-index:2;pointer-events:none;box-sizing:border-box;display:flex;align-items:center;padding:0 10px;color:#000;font-size:16px;line-height:21px;overflow:hidden}
+.blockLabel span{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:1;overflow:hidden;overflow-wrap:anywhere;word-break:keep-all}
+
+/* heavier Korean text */
+body{font-weight:400}
+input,textarea{font-weight:400}
+.blockLabel,.todoBlock,.chartLabel,#editor #name,#todoText{font-weight:500}
+#suggest button,#editor #recent .chip{font-weight:500}
+.settingGroup p,#notice,#alertBox p{font-weight:400}
+
+/* timetable — poster style A */
+:is(#grid,.preview-grid){grid-template-columns:28px minmax(0,1fr) minmax(0,1fr);border-block:0}
+:is(#grid,.preview-grid) :is(.hour,.cell){height:40px;border:0;box-sizing:border-box}
+:is(#grid,.preview-grid) .cell{background:transparent;padding:0}
+:is(#grid,.preview-grid) .cell.recorded{box-shadow:none;z-index:1}
+:is(#grid,.preview-grid) .hour{align-items:flex-start;padding-top:4px;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:-.02em;line-height:1;color:var(--ink)}
+:is(#grid,.preview-grid) .tick{box-shadow:inset 0 1.6px 0 var(--ink)}
+:is(#grid,.preview-grid) .cell.recorded.tick{box-shadow:none}
+.blockLabel{display:block;position:absolute;z-index:2;pointer-events:none;box-sizing:border-box;padding:0 0 0 8px;color:#000;font-family:"Pretendard Variable",Pretendard,sans-serif;font-size:22px;font-weight:600;letter-spacing:-.045em;white-space:nowrap;overflow:hidden}
+.bottomBar{border-top-width:1.6px}
+
+.sheetOpen .page{padding-bottom:75vh}
+
+/* timetable — full bleed (poster B layout) */
+:is(#grid,.preview-grid){width:100vw;margin-left:calc(50% - 50vw);grid-template-columns:0 minmax(0,1fr) minmax(0,1fr)}
+:is(#grid,.preview-grid) .hour{position:relative;z-index:3;overflow:visible;white-space:nowrap;padding:4px 0 0 5px;font-size:10px;pointer-events:none}
+:is(#grid,.preview-grid) .hour.onBlock{color:#000}
+.blockLabel{font-size:20.9px;padding-left:10px}
+.blockLabel.edgeLeft{padding-left:24px}
+
+.dayStage{margin-inline:calc(50% - 50vw);padding-inline:calc(50vw - 50%)}
+
+/* pinch → whole day */
+:is(#grid,.preview-grid) :is(.hour,.cell){height:var(--row,40px);transition:height .2s ease}
+html.compact .blockLabel{font-size:var(--label,11px);font-weight:600;letter-spacing:-.05em;padding-left:8px}
+html.compact .blockLabel.edgeLeft{padding-left:22px}
+:is(#grid,.preview-grid).resizing .blockLabel{opacity:0}
+.blockLabel{transition:opacity .12s ease}
+html.compact :is(#grid,.preview-grid) .hour{font-size:9px;padding-top:3px;letter-spacing:0}
+html.compact :is(#grid,.preview-grid) .hour{visibility:hidden}
+:is(#grid,.preview-grid),:is(#grid,.preview-grid) :is(.hour,.cell,.tick){box-shadow:none!important;border:0!important}
+.bottomBar{border-top:0!important}
+html.compact .blockLabel{letter-spacing:-.02em}
+:is(#bigDay,.preview-bigDay){display:none}
+html.compact .dayHeader{position:relative;display:block;height:calc(min(48.1vw,231px)*.8 + 6px);padding:0;margin-inline:calc(50% - 50vw);overflow:hidden}
+html.compact .dayHeader h1{position:static;font-size:inherit}
+html.compact .dayPicker{position:absolute;inset:0;display:block}
+html.compact .dayPicker:focus-within{outline-offset:-4px}
+html.compact :is(#dateLabel,.preview-dateLabel){display:none}
+html.compact :is(#bigDay,.preview-bigDay){display:block;font-family:var(--mono);font-weight:700}
+:is(#bigDay,.preview-bigDay) .bdNum{position:absolute;left:-.052em;top:-.127em;font-size:min(48.1vw,231px);line-height:1;letter-spacing:-.09em;font-weight:700}
+:is(#bigDay,.preview-bigDay) :is(.bdMeta,.bdSum){position:absolute;right:12px;text-align:right;font-size:14.4px;line-height:1.35;letter-spacing:-.01em;white-space:pre}
+:is(#bigDay,.preview-bigDay) .bdMeta{top:14px}
+:is(#bigDay,.preview-bigDay) .bdSum{bottom:12px;font-variant-numeric:tabular-nums}
+html.compact,html.compact body{overflow:hidden;overscroll-behavior:none;height:100%}
+html.compact .page{touch-action:none}
+html .bottomBar{border-top:0;padding:0 0 env(safe-area-inset-bottom,0px)}
+html .bottomBar .tabs{width:100%;justify-items:stretch}
+html .bottomBar .tabs button{display:block;height:46px;color:#8c8c88;text-align:center;padding:0}
+html .bottomBar .tabs button::before{content:none!important;display:none!important}
+html .bottomBar .tabs button[aria-pressed=true]{color:var(--ink)}
+html .bottomBar .tabs button>*{display:none}
+html .bottomBar .tabs button::after{font-family:var(--mono);font-weight:700;font-size:10.8px;letter-spacing:0}
+html .bottomBar #calendarBtn{text-align:left;padding-left:12px}
+html .bottomBar #settingsBtn{text-align:right;padding-right:12px}
+html .bottomBar #calendarBtn::after{content:'CAL'}
+html .bottomBar #tableBtn::after{content:'DAY'}
+html .bottomBar #settingsBtn::after{content:'SET'}
+html .bottomBar #calendarBtn[aria-pressed=true]::after{content:'● CAL'}
+html .bottomBar #tableBtn[aria-pressed=true]::after{content:'● DAY'}
+html .bottomBar #settingsBtn[aria-pressed=true]::after{content:'● SET'}
+html:not(.compact) .bottomBar .tabs button{height:60px}
+html:not(.compact) .bottomBar .tabs button::after{font-size:15px}
+html:not(.compact) .bottomBar #calendarBtn{padding-left:16px}
+html:not(.compact) .bottomBar #settingsBtn{padding-right:16px}
+@media(prefers-reduced-motion:reduce){:is(#grid,.preview-grid) :is(.hour,.cell){transition:none}}
+#pinchHint{position:fixed;z-index:25;left:50%;bottom:calc(96px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);display:flex;align-items:center;gap:10px;height:40px;padding:0 16px;background:var(--ink);color:var(--paper);font-size:14px;font-weight:500;white-space:nowrap;cursor:pointer}
+#pinchHint[hidden]{display:none}
+/* clock: smaller numbers, bigger circle */
+.dial{max-width:560px;margin:16px auto}
+.dial>b{font-size:10px;letter-spacing:-.02em}
+:is(#ring,.preview-ring){inset:4.5%}
+#grid{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}
+
+/* calendar → week review */
+#calendar{padding-top:18px}
+#calendar .monthBar{align-items:flex-start;margin-bottom:0}
+.weekPicker{position:relative;display:block;margin-right:auto;cursor:pointer}
+.weekPicker h2{margin:0;font-family:var(--mono);font-weight:700;font-size:15px;letter-spacing:-.05em;line-height:1}
+#weekNo{display:block;margin-top:6px;font-family:var(--mono);font-weight:700;font-size:10px;color:#8c8c88;letter-spacing:0}
+.weekPicker input{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:pointer}
+.weekPicker input::-webkit-calendar-picker-indicator{position:absolute;inset:0;width:auto;height:auto;cursor:pointer}
+#calendar .monthBar button{font-family:var(--mono);font-weight:700;font-size:18px;padding:2px 10px}
+#calendar .weekDays{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:0;width:100vw;margin:18px 0 0 calc(50% - 50vw)}
+.weekDay{display:flex;flex-direction:column;align-items:stretch;padding:0;border:0;border-radius:0;background:transparent;color:var(--ink);text-align:left;min-width:0}
+.weekDay .wdName{padding-left:6px;font-family:var(--mono);font-weight:700;font-size:10px;color:#8c8c88;line-height:1}
+.weekDay .wdNum{align-self:flex-start;margin:4px 0 0 4px;padding:0 2px;font-family:var(--mono);font-weight:700;font-size:27px;letter-spacing:-.06em;line-height:1.15}
+.weekDay[aria-pressed=true] .wdNum{background:var(--ink);color:var(--paper)}
+.weekDay .wdStrip{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:repeat(24,1fr);height:min(40vh,340px);margin:10px 1px 0}
+.weekDay .wdStrip i{display:block;min-height:0}
+#calendar .agenda{border-top:0;margin-top:22px;padding-top:0}
+#calendar .agendaHead h3{font-family:var(--mono);font-weight:700;font-size:15px;letter-spacing:0}
+#calendar #addTodo{font-family:var(--mono);font-size:22px;width:36px;height:36px}
+#calendar #todoList{gap:0;width:100vw;margin:8px 0 0 calc(50% - 50vw)}
+#calendar .todoBlock{min-height:52px;place-items:center start;padding:8px 12px 8px 16px;text-align:left}
+#calendar .todoBlock.done span{text-decoration:line-through;text-decoration-thickness:1.6px}
+#calendar .todoBlock.done{opacity:.45}
+
+/* faint + marks at hour/half-hour intersections (normal view only) */
+:root{--cross:#c9c9c4}
+html[data-theme=dark]{--cross:#4a4a47}
+html:not(.compact) :is(#grid,.preview-grid){background-image:linear-gradient(to bottom,var(--cross) 0 1px,transparent 1px),linear-gradient(to bottom,var(--cross) 0 4px,transparent 4px calc(100% - 3px),var(--cross) calc(100% - 3px)),linear-gradient(to bottom,var(--cross) 0 1px,transparent 1px),linear-gradient(to bottom,var(--cross) 0 1px,transparent 1px);background-size:7px 40px,1px 40px,5px 40px,5px 40px;background-position:50% 0,50% 0,0 0,100% 0;background-repeat:repeat-y}
+:is(#grid,.preview-grid) .hour.now span{margin-left:-2px;padding:1px 2px;background:var(--ink);color:var(--paper)}
+
+/* ===== sheet B: colour-block name panel, no heavy rules ===== */
+:root{--fill:#e6e6e2;--muted:#8c8c88}
+html[data-theme=dark]{--fill:#262624;--muted:#7c7c78}
+dialog:is(#editor,#todoSheet){border-top:0!important;background:var(--paper);box-shadow:0 -12px 40px rgba(0,0,0,.12)}
+:is(#editor,#todoSheet) .sheetHandle{position:absolute;left:50%;top:8px;margin:0 0 0 -18px!important;height:3px!important;background:rgba(0,0,0,.25)!important;z-index:2}
+:is(#editor,#todoSheet) form{position:relative}
+:is(#editor,#todoSheet) .sheetBody{padding:0 0 12px!important}
+.namePanel{padding:26px 16px 22px;background:var(--fill);color:#000;transition:background .15s}
+.namePanel .sheetHead{display:flex;align-items:baseline;justify-content:space-between}
+.namePanel :is(#range,#duration,#todoHeading,#todoDate){margin:0;font-family:var(--mono)!important;font-weight:700;font-size:12px!important;letter-spacing:0!important;color:#000!important}
+.namePanel :is(#name,#todoText){display:block;width:100%;height:auto!important;margin:14px 0 0;padding:0!important;border:0!important;outline:0!important;background:transparent!important;color:#000!important;font-family:"Pretendard Variable",Pretendard,sans-serif;font-size:30px!important;font-weight:600!important;letter-spacing:-.05em;line-height:1.2;caret-color:#000}
+.namePanel :is(#name,#todoText)::placeholder{color:rgba(0,0,0,.35)!important}
+#suggest{border:0!important;margin:0!important;background:var(--paper)}
+#suggest li+li{border-top:0!important}
+#suggest button{height:46px!important;padding:0 16px!important;font-size:15px}
+#suggest .dot{width:16px!important;height:16px!important}
+:is(#editor #colors,#todoColors){display:grid!important;grid-template-columns:repeat(7,40px)!important;justify-content:space-between;gap:0!important;padding:20px 16px 0}
+:is(#editor #colors,#todoColors) .swatch{height:40px!important;border:0!important;outline:0!important}
+:is(#editor #colors,#todoColors) .swatch[aria-pressed=true]{outline:0!important;box-shadow:inset 0 0 0 1.6px #000}
+#editor .colorHead{margin:14px 16px 0!important}
+#customBtn{font-family:var(--mono);font-weight:700;font-size:12px!important;text-decoration:none!important;padding:6px 0!important;letter-spacing:0}
+:is(#editor,#todoSheet) footer{display:grid!important;grid-template-columns:auto 1fr 2fr;gap:0!important;padding:0 0 env(safe-area-inset-bottom,0px)!important;border-top:0!important;margin-top:16px!important}
+:is(#editor,#todoSheet) footer button{height:56px!important;border:0!important;font-size:16px!important;font-weight:600!important}
+:is(#editor,#todoSheet) footer :is(#del,#todoDel){width:56px!important;color:var(--muted)!important;background:transparent!important}
+:is(#editor,#todoSheet) footer :is(#del,#todoDel)[hidden]{display:none!important}
+:is(#editor,#todoSheet) footer :is(#cancel,#todoCancel){grid-column:2;justify-self:start;padding:0 16px!important;color:var(--muted)!important;background:transparent!important}
+:is(#editor,#todoSheet) footer :is(#save,#todoSave){grid-column:3;text-align:left;padding:0 18px!important;background:var(--ink)!important;color:var(--paper)!important}
+:is(#editor,#todoSheet) footer :is(#save,#todoSave):disabled{background:var(--fill)!important;color:var(--muted)!important}
+
+/* ===== settings A ===== */
+#settings{padding-top:18px}
+#settings>h2{margin:0 0 30px;font-family:var(--mono);font-weight:700;font-size:25px;letter-spacing:-.05em;line-height:1.1}
+#settings .setGroup{margin:0 0 30px;padding:0;border:0}
+#settings .setGroup h3{margin:0 0 10px;font-family:var(--mono);font-weight:700;font-size:15px;letter-spacing:0}
+#settings .setNote{margin:10px 0 0;font-size:12.5px;line-height:1.45;color:#5f5f5b}
+html[data-theme=dark] #settings .setNote{color:#a0a09c}
+#settings .themeRow{display:grid;grid-template-columns:repeat(3,1fr);width:100vw;margin-left:calc(50% - 50vw)}
+#settings .themeRow button{height:52px;border:0;border-radius:0;margin:0;padding:0 16px;text-align:left;background:var(--fill);color:var(--ink);font-family:var(--mono);font-weight:700;font-size:12px;letter-spacing:0}
+#settings .themeRow button[aria-checked=true]{background:var(--ink);color:var(--paper)}
+#settings .setRow{position:relative;display:block;width:100vw;margin:0 0 4px calc(50% - 50vw);min-height:80px;border:0;border-radius:0;padding:16px 96px 16px 16px;text-align:left;background:var(--fill);color:var(--ink)}
+#settings .setRow b{display:block;font-size:16px;font-weight:600;letter-spacing:-.03em}
+#settings .setRow small{display:block;margin-top:6px;font-size:12px;line-height:1.4;color:#5f5f5b;font-weight:450}
+html[data-theme=dark] #settings .setRow small{color:#a0a09c}
+#settings .setRow i{position:absolute;right:16px;top:18px;font-style:normal;font-family:var(--mono);font-weight:700;font-size:12px}
+
+/* trash in the panel corner */
+.namePanel .sheetHead{align-items:center!important}
+.namePanel .headRight{display:flex;align-items:center;gap:8px}
+.namePanel :is(#del,#todoDel){width:36px;height:36px;margin:-10px -8px -10px 0;padding:0;border:0!important;background:transparent!important;color:#000!important;display:grid;place-items:center}
+.namePanel :is(#del,#todoDel)[hidden]{display:none!important}
+:is(#editor,#todoSheet) footer{grid-template-columns:1fr 2fr!important}
+:is(#editor,#todoSheet) footer :is(#cancel,#todoCancel){grid-column:1!important}
+:is(#editor,#todoSheet) footer :is(#save,#todoSave){grid-column:2!important}
+.todoBlock{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}
+
+#calendar{padding-top:0!important}
+#calendar .monthBar{align-items:center!important;padding:clamp(20px,4vw,50px) 0 0}
+#calendar .monthBar button{margin:0}
+@keyframes weekInR{from{transform:translateX(28px);opacity:0}to{transform:none;opacity:1}}
+@keyframes weekInL{from{transform:translateX(-28px);opacity:0}to{transform:none;opacity:1}}
+#monthDays.weekInR{animation:weekInR .22s ease-out}#monthDays.weekInL{animation:weekInL .22s ease-out}
+@media (prefers-reduced-motion:reduce){#monthDays.weekInR,#monthDays.weekInL{animation:none}}
+#monthDays{touch-action:pan-y}
+#calendar .monthBar :is(#monthPrev,#monthNext){display:none}
+
+/* roomier title area + bigger tap target */
+html:not(.compact) .dayHeader{padding:32px 0 30px!important}
+html:not(.compact) .dayPicker{padding:12px 16px 12px 0;margin:-12px -16px -12px 0}
+#calendar .monthBar{padding:30px 0 0!important}
+.weekPicker{padding:12px 16px 12px 0;margin:-12px -16px -12px 0!important}
+#calendar .weekDays{margin-top:30px!important}
+.dayInfo{font-family:var(--mono);font-weight:700;font-size:15px;letter-spacing:0;white-space:nowrap}
+html.compact :is(#dayInfo,.preview-dayInfo){display:none}
+html:not(.compact) .dayHeader h1,.weekPicker h2{letter-spacing:0!important}
+html.compact .blockLabel.edgeLeft{padding-left:8px!important}
+#nowLine{display:none}
+html.compact #grid #nowLine:not([hidden]){display:block;position:absolute;left:0;right:0;top:calc(var(--row) * var(--nowh,0));height:2px;background:var(--ink);z-index:4;pointer-events:none}
+html.compact #nowLine span{position:absolute;right:12px;bottom:4px;font-family:var(--mono);font-weight:700;font-size:12px;letter-spacing:0;color:var(--ink);line-height:1}
+.preview-grid #nowLine,.preview-grid [id=nowLine]{display:none!important}
+.namePanel{position:relative}
+#editor #suggest{position:absolute;left:0;right:0;top:100%;z-index:6;max-height:none;margin:0!important;background:var(--paper)!important;box-shadow:0 10px 24px rgba(0,0,0,.12)}
+#editor #suggest small{font-family:var(--mono);font-weight:700;font-size:10px;color:var(--muted,#8c8c88)}
+#editor #suggest button{height:40px!important}
+#editor .namePanel{z-index:5}
+</style></head><body><div class="dayStage"><div class="page"><header class="dayHeader"><h1><label class="dayPicker"><span id="dateLabel"></span><span id="bigDay" aria-hidden="true"><b class="bdNum"></b><span class="bdMeta"></span><span class="bdSum"></span></span><input type="date" id="date" aria-label="날짜 선택"></label></h1><span id="dayInfo" class="dayInfo" aria-live="off"></span></header><p id="notice" role="status" hidden></p><main><section class="sheet"><section id="calendar" hidden><div class="monthBar"><label class="weekPicker"><h2 id="monthTitle"></h2><input type="date" id="weekDate" aria-label="날짜로 이동"></label><button type="button" id="monthPrev" aria-label="이전 주">‹</button><button type="button" id="monthNext" aria-label="다음 주">›</button></div><div id="monthDays" class="weekDays" aria-label="이번 주 날짜 선택"></div><section class="agenda"><div class="agendaHead"><h3 id="todoHead">TO DO</h3><button id="addTodo" type="button" aria-label="할 일 추가" aria-haspopup="dialog">+</button></div><ul id="todoList"></ul></section></section><div id="table"><div id="grid"><div id="selection" hidden></div></div></div><div id="clock" hidden><div class="dial"><b>0</b><b>6</b><b>12</b><b>18</b><div id="ring"></div></div></div><section id="settings" hidden aria-labelledby="settingsTitle"><h2 id="settingsTitle">SETTINGS</h2><section class="setGroup"><h3>THEME</h3><div class="themeRow" role="radiogroup" aria-label="테마"><button type="button" role="radio" data-theme-choice="system">SYSTEM</button><button type="button" role="radio" data-theme-choice="light">LIGHT</button><button type="button" role="radio" data-theme-choice="dark">DARK</button></div><p class="setNote">시스템을 고르면 기기 설정에 맞춰 바뀌어요.</p></section><section class="setGroup"><h3>STORAGE</h3><p id="syncStatus" class="setNote" role="status">저장 방식을 확인하고 있어요.</p></section><section class="setGroup"><h3>BACKUP</h3><button type="button" id="download" class="setRow"><b>백업 다운로드</b><small>모든 날짜의 기록, 최근 활동과 할 일을 JSON 파일로 보관해요.</small><i aria-hidden="true">↓ SAVE</i></button><button type="button" id="upload" class="setRow"><b>백업 복원</b><small>백업 파일에서 기록을 가져와요. 시간이 겹치면 이 기기의 기록을 유지해요.</small><i aria-hidden="true">↑ OPEN</i></button><input id="backupFile" type="file" accept=".json,application/json" hidden></section></section></section></main></div></div><nav class="bottomBar" aria-label="보기 전환"><div class="tabs"><button id="calendarBtn" title="캘린더" aria-label="캘린더"><span class="todayNum" id="todayNum" aria-hidden="true"></span></button><button id="tableBtn" title="표" aria-label="표"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17"/></svg></button><button id="settingsBtn" aria-label="설정" title="설정"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><defs><mask id="gearHole"><rect width="24" height="24" fill="#fff"/><circle cx="12" cy="12" r="3.2" fill="#000"/></mask></defs><g mask="url(#gearHole)"><circle cx="12" cy="12" r="7.4"/><rect x="10" y="1.5" width="4" height="21"/><rect x="10" y="1.5" width="4" height="21" transform="rotate(45 12 12)"/><rect x="10" y="1.5" width="4" height="21" transform="rotate(90 12 12)"/><rect x="10" y="1.5" width="4" height="21" transform="rotate(135 12 12)"/></g></svg></button></div></nav><dialog id="todoSheet" aria-labelledby="todoHeading"><form><div class="sheetHandle" aria-hidden="true"></div><div class="sheetBody"><div class="namePanel" id="todoPanel"><div class="sheetHead"><h2 id="todoHeading"></h2><span id="todoDate" hidden></span><button type="button" id="todoDel" aria-label="할 일 삭제" hidden><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13M10 11v6M14 11v6"/></svg></button></div><label for="todoText" class="fieldLabel srOnly">할 일</label><input id="todoText" maxlength="200" autocomplete="off" placeholder="무엇을 할까요?"></div><span class="fieldLabel srOnly">색상</span><div id="todoColors"></div></div><footer><button type="button" id="todoCancel">취소</button><button type="button" id="todoSave">추가</button></footer></form></dialog><dialog id="alertBox" aria-labelledby="alertText"><p id="alertText"></p><div class="alertActions"><button type="button" id="alertOk">확인</button></div></dialog><dialog id="editor" aria-labelledby="heading"><form><div class="sheetHandle" aria-hidden="true"></div><div class="sheetBody"><h2 id="heading" class="srOnly" tabindex="-1">활동 등록</h2><div class="namePanel" id="namePanel"><div class="sheetHead"><p id="range"></p><span class="headRight"><span id="duration"></span><button type="button" id="del" aria-label="이 블록 삭제"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13M10 11v6M14 11v6"/></svg></button></span></div><label for="name" class="fieldLabel srOnly">활동 이름</label><input id="name" maxlength="60" autocomplete="off" placeholder="무엇을 했나요?" role="combobox" aria-autocomplete="list" aria-controls="suggest" aria-expanded="false"><ul id="suggest" aria-label="이름 추천" hidden></ul></div><span class="fieldLabel srOnly">색상</span><div id="colors"></div><div class="colorHead"><button type="button" id="customBtn">CUSTOM +</button></div></div><footer><button type="button" id="cancel">취소</button><button type="button" id="save">저장</button></footer></form></dialog><div id="pinchHint" role="status" hidden><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="7" cy="7" r="3"/><circle cx="17" cy="17" r="3"/><path d="M10 10l4 4M14 6h4v4M10 18H6v-4"/></svg><span>두 손가락으로 오므리면 하루 전체 보기</span></div><div id="toast" role="status" hidden><span id="toastText"></span><button type="button" id="undo">되돌리기</button></div><script>'use strict';
+function guardBackdrop(d){
+ let downOnBackdrop=false,openedAt=0;
+ new MutationObserver(()=>{if(d.open)openedAt=performance.now()}).observe(d,{attributes:true,attributeFilter:['open']});
+ d.addEventListener('pointerdown',e=>{downOnBackdrop=e.target===d&&performance.now()-openedAt>350});
+ d.addEventListener('click',e=>{const ok=downOnBackdrop&&e.target===d;downOnBackdrop=false;if(ok)d.close()});
+}
+
+const $=id=>document.getElementById(id);
+const THEME_KEY='haru-blocks.theme',darkQuery=matchMedia('(prefers-color-scheme: dark)');
+let themePref='system',isDark=false;
+try{themePref=localStorage.getItem(THEME_KEY)||'system'}catch{}
+const blockColor=c=>c;
+const blockInk=()=>'#000';
+function applyTheme(){
+ isDark=themePref==='dark'||(themePref==='system'&&darkQuery.matches);
+ document.documentElement.dataset.theme=isDark?'dark':'light';
+ document.querySelector('meta[name=theme-color]').content=isDark?'#121212':'#ffffff';
+ for(const b of document.querySelectorAll('[data-theme-choice]'))b.setAttribute('aria-checked',String(b.dataset.themeChoice===themePref));
+ for(const b of document.querySelectorAll('.swatch'))b.style.background=blockColor(b.dataset.color);
+}
+applyTheme();
+const palette=["#fa8040","#568999","#789449","#f6a0a6","#f5c54b","#ad83ba","#ed5b57"];
+const uid='haru-blocks.v1';
+const cache=new Map();
+let local=null;
+try{
+ local=window.localStorage;
+ const probe=uid+'.test.'+Math.random();
+ local.setItem(probe,'1');local.removeItem(probe);
+ for(let i=0;i<local.length;i++){const k=local.key(i);if(k&&k.startsWith(uid+'.'))cache.set(k,local.getItem(k))}
+}catch{local=null}
+let cloud=null,writing=null,syncing=false,failures=0;
+const pendingSync=new Map(),dirty=new Set();
+const docIdFor=key=>{
+ if(!key||!key.startsWith(uid+'.'))return null;
+ const s=key.slice(uid.length+1);
+ return validDay(s)||(s.startsWith('todo.')&&validDay(s.slice(5)))||s==='recent'?s:null;
+};
+const records={
+ get length(){return cache.size},
+ key(i){return [...cache.keys()][i]??null},
+ getItem(key){return cache.get(key)??null},
+ setItem(key,value){
+  if(cache.get(key)===value)return;
+  cache.set(key,value);
+  if(local)try{local.setItem(key,value)}catch{}
+  const id=docIdFor(key);
+  if(!id)return;
+  if(cloud){pendingSync.set(id,value);pumpSync()}else dirty.add(id);
+ },
+ removeItem(key){cache.delete(key);if(local)try{local.removeItem(key)}catch{}}
+};
+const wait=ms=>new Promise(r=>setTimeout(r,ms));
+async function pumpSync(){
+ if(syncing||!cloud)return;
+ syncing=true;
+ while(cloud&&pendingSync.size){
+  const [id,value]=pendingSync.entries().next().value;
+  pendingSync.delete(id);writing=id;
+  try{
+   await cloud.col.doc(id).set({value:JSON.parse(value)});failures=0;
+  }catch(error){
+   const code=error?.code;
+   if(code==='quota_exceeded'){notifyUser('계정 저장 공간이 가득 찼어요. 새 기록은 이 기기에만 저장돼요.');}
+   else if(code==='revoked'||code==='not_granted'||code==='capability_disabled'||code==='capability_removed'){cloud=null;setSyncStatus('local')}
+   else if(code!=='invalid_argument'&&code!=='transform_error'){
+    if(!pendingSync.has(id))pendingSync.set(id,value);
+    if(++failures>=5){failures=0;writing=null;setSyncStatus('retry');break}
+    await wait(code==='resource_exhausted'?3000:800+Math.random()*1200);
+   }
+  }
+  writing=null;
+ }
+ syncing=false;
+}
+function setSyncStatus(state){
+ const text={
+  checking:'저장 방식을 확인하고 있어요.',
+  slow:'계정 저장소에 연결하는 중이에요. 그동안 기록은 이 기기에 먼저 저장돼요.',
+  cloud:'기록이 Claude 계정에 자동으로 저장돼요. 이 아티팩트를 여는 다른 기기에서도 같은 기록이 보여요.',
+  retry:'계정 저장소에 잠시 연결되지 않아요. 기록은 이 기기에 저장되고, 다음에 기록할 때 다시 동기화해요.',
+  local:'기록이 이 기기의 브라우저에 저장돼요. 다른 기기로 옮기려면 백업 파일을 사용하세요.'
+ }[state];
+ const el=document.getElementById('syncStatus');if(el)el.textContent=text;
+}
+function applyExternal(keys){
+ if(keys.includes(uid+'.'+day)&&!$('editor').open){slots=read('.'+day)||Array(48).fill(null);render()}
+ if(!calendarPanel.hidden&&keys.some(k=>k.startsWith(uid+'.todo.')))renderCalendar();
+}
+function finishLocalOnly(){
+ setSyncStatus('local');
+ if(!local)notifyUser('이 화면은 기록을 임시로 보관해요. 닫기 전에 설정의 백업 다운로드로 보관해 주세요.');
+}
+async function connectCloud(){
+ if(!window.claude?.use){finishLocalOnly();return}
+ try{
+  const [db,user]=await Promise.all([claude.use('db'),claude.use('user')]);
+  const userId=db&&user?await user.id():null;
+  if(!userId){finishLocalOnly();return}
+  const col=db.collection('data/users/'+userId);
+  let first=true;
+  const timer=setTimeout(()=>{if(first)setSyncStatus('slow')},10000);
+  col.onSnapshot(snap=>{
+   const changed=[];
+   for(const d of snap.docs){
+    const key=uid+'.'+d.id;
+    if(!docIdFor(key)||pendingSync.has(d.id)||writing===d.id||(first&&dirty.has(d.id)))continue;
+    const value=JSON.stringify(d.data()?.value??null);
+    if(cache.get(key)!==value){cache.set(key,value);if(local)try{local.setItem(key,value)}catch{}changed.push(key)}
+   }
+   if(first&&!snap.metadata.fromCache){
+    first=false;clearTimeout(timer);cloud={col};
+    const remote=new Set(snap.docs.map(d=>d.id));
+    for(const [key,value] of cache){const id=docIdFor(key);if(id&&(!remote.has(id)||dirty.has(id)))pendingSync.set(id,value)}
+    dirty.clear();setSyncStatus('cloud');pumpSync();
+   }
+   if(changed.length)applyExternal(changed);
+  },()=>{clearTimeout(timer);cloud=null;finishLocalOnly()});
+ }catch{finishLocalOnly()}
+}
+const read=key=>JSON.parse(records.getItem(uid+key)||'null');
+const dateKey=d=>[d.getFullYear(),String(d.getMonth()+1).padStart(2,'0'),String(d.getDate()).padStart(2,'0')].join('-');
+let day=dateKey(new Date()),slots=[],picked=[],color=palette[0],drag=null;
+const cells=[];
+const same=(a,b)=>a&&b&&a.name===b.name&&a.color===b.color;
+const duration=n=>(n>=2?Math.floor(n/2)+'시간':'')+(n%2?(n>=2?' ':'')+'30분':'');
+const hour=i=>String(Math.floor(i/2)).padStart(2,'0')+':'+(i%2?'30':'00');
+const node=(tag,txt)=>Object.assign(document.createElement(tag),{textContent:txt});
+const dot=c=>{const d=node('i','');d.className='dot';d.style.background=blockColor(c);return d};
+for(let i=0;i<48;i++){
+ if(!(i%2)){const h=node('div','');h.append(node('span',String(i/2)));h.className='hour'+(i%12===0?' tick':'');$('grid').append(h)}
+ const b=node('button','');b.className='cell'+(Math.floor(i/2)%6===0?' tick':'');b.dataset.i=i;cells.push(b);$('grid').append(b);
+ b.onkeydown=e=>{if(!e.repeat&&(e.key==='Enter'||e.key===' ')){e.preventDefault();openEditor([i],true)}};
+}
+const WD=['SUN','MON','TUE','WED','THU','FRI','SAT'];
+const formatDayFull=k=>formatDay(k)+' '+WD[new Date(k+'T12:00').getDay()];
+const formatDay=day=>Number(day.slice(8))+' '+['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'][Number(day.slice(5,7))-1];
+function fillBigDay(root,key,data){
+ const el=root.querySelector('#bigDay,.preview-bigDay');if(!el)return;
+ const d=new Date(key+'T12:00'),n=data.filter(Boolean).length;
+ el.querySelector('.bdNum').textContent=Number(key.slice(8));
+ el.querySelector('.bdMeta').textContent=['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'][d.getMonth()]+'\n'+d.getFullYear()+'\n'+['SUN','MON','TUE','WED','THU','FRI','SAT'][d.getDay()];
+ el.querySelector('.bdSum').textContent=bigDaySum(key,n);
+}
+function bigDaySum(key,n){
+ const now=new Date(),today=dateKey(now);
+ if(key===today){const left=Math.max(0,Math.floor((new Date(now.getFullYear(),now.getMonth(),now.getDate()+1)-now)/1000)),p=v=>String(v).padStart(2,'0');const blocks=Math.ceil(left/1800);return p(Math.floor(left/3600))+':'+p(Math.floor(left%3600/60))+':'+p(left%60)+'\n'+blocks+(blocks===1?' BLOCK':' BLOCKS')+' LEFT'}
+ const diff=Math.round((new Date(key+'T12:00')-new Date(today+'T12:00'))/864e5);
+ if(diff>0)return 'IN\n'+diff+(diff===1?' DAY':' DAYS');
+ return n+'/48\nBLOCKS';
+}
+function dayInfoText(key,n){
+ const now=new Date(),today=dateKey(now);
+ if(key===today){const b=Math.ceil(Math.max(0,new Date(now.getFullYear(),now.getMonth(),now.getDate()+1)-now)/18e5);return b+(b===1?' BLOCK':' BLOCKS')+' LEFT'}
+ const diff=Math.round((new Date(key+'T12:00')-new Date(today+'T12:00'))/864e5);
+ if(diff>0)return 'IN '+diff+(diff===1?' DAY':' DAYS');
+ return n+'/48 BLOCKS';
+}
+function fillDayInfo(root,key,data){const el=root.querySelector('#dayInfo,.preview-dayInfo');if(el)el.textContent=dayInfoText(key,data.filter(Boolean).length)}
+setInterval(()=>{if(!compactMode||document.hidden)return;const el=$('bigDay');if(el&&dateKey(new Date())===day)el.querySelector('.bdSum').textContent=bigDaySum(day,0)},1000);
+function loadDay(value){if(!value)return;if(value!==day)showTaskInput(false);dateSwipe=null;clearSlide();day=value;slots=read('.'+day)||Array(48).fill(null);$('date').value=day;$('dateLabel').textContent=formatDayFull(day);render();if(!calendarPanel.hidden)renderCalendar()}
+function updateNowLine(){const g=$('grid');let l=$('nowLine');if(!l){l=node('div','');l.id='nowLine';l.setAttribute('aria-hidden','true');l.append(node('span','NOW'));g.append(l)}const now=new Date();l.hidden=day!==dateKey(now);g.style.setProperty('--nowh',String(now.getHours()))}
+function markNowHour(grid,key){const now=new Date(),on=key===dateKey(now);grid.querySelectorAll('.hour').forEach((h,i)=>h.classList.toggle('now',on&&i===now.getHours()))}
+setInterval(()=>{if(!document.hidden){markNowHour($('grid'),day);fillDayInfo(document,day,slots);updateNowLine()}},30000);
+function render(data=slots,buttons=cells,chart=$('ring')){
+ if(buttons===cells){fillBigDay(document,day,data);fillDayInfo(document,day,data);markNowHour($('grid'),day);updateNowLine()}
+ const stops=[];
+ data.forEach((s,i)=>{
+  const b=buttons[i],joined=same(s,data[i-1]);b.textContent='';if(!(i%2))b.previousElementSibling?.classList.toggle('onBlock',Boolean(s));b.classList.toggle('joined',!!(i%2&&joined));b.classList.toggle('recorded',Boolean(s));b.style.backgroundColor=s?blockColor(s.color):'';b.style.setProperty('--c',s?blockColor(s.color):'transparent');b.style.color=blockInk();
+  b.setAttribute('aria-label',hour(i)+'~'+hour(i+1)+' '+(s?.name||'빈칸'));stops.push((s?blockColor(s.color):'var(--paper)')+' '+(i*7.5)+'deg '+((i+1)*7.5)+'deg');
+ });
+
+ chart.style.background='conic-gradient('+stops.join(',')+')';
+ renderChartLabels(data,chart);
+ buildBlockLabels(data,buttons);
+}
+function buildBlockLabels(data,buttons){
+ const host=buttons[0]?.parentElement;if(!host)return;
+ for(const old of host.querySelectorAll('.blockLabel'))old.remove();
+ let run=0;
+ for(let a=0;a<data.length;){
+  const item=data[a];if(!item){a++;continue}
+  let b=a+1;while(b<data.length&&same(item,data[b]))b++;
+  for(let r=a>>1;r<=(b-1)>>1;r++){
+   const from=Math.max(a,r*2),to=Math.min(b,r*2+2)-1;
+   const label=node('div','');label.className='blockLabel';label.setAttribute('aria-hidden','true');
+   label.dataset.from=from;label.dataset.to=to;label.dataset.run=run;label.dataset.name=item.name;
+   host.append(label);
+  }
+  run++;a=b;
+ }
+ layoutLabels(host);
+}
+const measureCtx=document.createElement('canvas').getContext('2d');
+function textWidth(text,label){
+ const cs=getComputedStyle(label);
+ measureCtx.font=cs.fontWeight+' '+cs.fontSize+' '+cs.fontFamily;
+ const ls=parseFloat(cs.letterSpacing)||0;
+ return measureCtx.measureText(text).width+ls*[...text].length;
+}
+function layoutLabels(host){
+ if(!host)return;
+ const all=host.querySelectorAll('.cell'),labels=[...host.querySelectorAll('.blockLabel')];
+ let rest='',lastRun=null,prev=null;
+ for(const label of labels){
+  const f=all[+label.dataset.from],t=all[+label.dataset.to];if(!f||!t)continue;
+  const left=f.offsetLeft,top=f.offsetTop,width=t.offsetLeft+t.offsetWidth-left,height=t.offsetTop+t.offsetHeight-top;
+  Object.assign(label.style,{left:left+'px',top:top+'px',width:width+'px',height:height+'px',lineHeight:height+'px'});
+  if(label.dataset.run!==lastRun){
+   if(prev&&rest)prev.textContent=prev.textContent.slice(0,-1)+'…';
+   lastRun=label.dataset.run;rest=label.dataset.name;
+  }
+  if(!width){label.textContent='';prev=label;continue}
+  label.classList.toggle('edgeLeft',+label.dataset.from%2===0);
+  rest=rest.replace(/^\s+/,'');
+  const chars=[...rest],avail=width-parseFloat(getComputedStyle(label).paddingLeft||0)-6;
+  let n=0;while(n<chars.length&&textWidth(chars.slice(0,n+1).join(''),label)<=avail)n++;
+  label.textContent=chars.slice(0,n).join('');rest=chars.slice(n).join('');prev=label;
+ }
+ if(prev&&rest&&prev.textContent)prev.textContent=prev.textContent.slice(0,-1)+'…';
+}
+window.addEventListener('resize',()=>layoutLabels($('grid')));
+if(document.fonts)document.fonts.ready.then(()=>layoutLabels($('grid')));
+function renderChartLabels(data,chart){
+ chart.replaceChildren();
+ for(let start=0;start<data.length;){
+  const item=data[start];
+  if(!item){start++;continue}
+  let end=start+1;
+  while(end<data.length&&same(item,data[end]))end++;
+  const span=end-start;
+  const degrees=(start+end)*3.75-90;
+  const radians=degrees*Math.PI/180;
+  const radius=span===48?0:span<5?36:29;
+  const label=node('button',item.name);
+  label.type='button';
+  label.className='chartLabel'+(span<5?' narrow':'');
+  label.style.left=(50+radius*Math.cos(radians))+'%';
+  label.style.top=(50+radius*Math.sin(radians))+'%';
+  if(span<5)label.style.setProperty('--tilt',(degrees>90?degrees-180:degrees)+'deg');
+  label.style.color=span<5?blockInk():'var(--ink)';
+  label.title=item.name+' · '+hour(start)+'–'+hour(end);
+  label.setAttribute('aria-label',label.title);
+  const first=start;
+  label.onclick=()=>openEditor([first],true);
+  chart.append(label);
+  start=end;
+ }
+}
+const calendarPanel=$('calendar');
+const tasksOn=key=>read('.todo.'+key)||[];
+function updateTasks(change){
+ const next=change(tasksOn(day)),key=uid+'.todo.'+day;
+ records.setItem(key,JSON.stringify(next));
+ renderCalendar();
+}
+function renderCalendar(){
+ const selected=new Date(day+'T12:00'),start=new Date(selected);start.setDate(selected.getDate()-selected.getDay());
+ const end=new Date(start);end.setDate(start.getDate()+6);
+ const M=d=>['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'][d.getMonth()];
+ const thu=new Date(start);thu.setDate(start.getDate()+4);const jan1=new Date(thu.getFullYear(),0,1);
+ $('monthTitle').textContent=M(thu)+' W'+String(Math.ceil(((thu-jan1)/864e5+1)/7)).padStart(2,'0')+' '+thu.getFullYear();
+ $('weekDate').value=day;
+ const days=$('monthDays');days.replaceChildren();
+ for(let n=0;n<7;n++){
+  const d=new Date(start);d.setDate(start.getDate()+n);const key=dateKey(d),data=read('.'+key)||Array(48).fill(null);
+  const button=node('button','');button.type='button';button.className='weekDay';
+  const wd=node('span','SMTWTFS'[n]);wd.className='wdName';
+  const num=node('b',String(d.getDate()));num.className='wdNum';
+  const strip=node('span','');strip.className='wdStrip';strip.setAttribute('aria-hidden','true');
+  data.forEach((v,i)=>{if(!v)return;const c=node('i','');c.style.gridRow=String((i>>1)+1);c.style.gridColumn=String(i%2+1);c.style.background=blockColor(v.color);strip.append(c)});
+  button.append(wd,num,strip);
+  const total=tasksOn(key).filter(t=>!t.done).length;
+  button.setAttribute('aria-label',key+' · 기록 '+data.filter(Boolean).length/2+'시간 · 할 일 '+total+'개');
+  button.setAttribute('aria-pressed',key===day);button.onclick=()=>loadDay(key);days.append(button);
+ }
+ $('todoHead').textContent='TO DO · '+tasksOn(day).filter(t=>!t.done).length;
+ const list=$('todoList');list.replaceChildren();
+ for(const task of tasksOn(day)){
+  const row=node('li',''),block=node('button','');
+  block.type='button';block.className='todoBlock'+(task.color?'':' noColor')+(task.done?' done':'');
+  if(task.color)block.style.background=blockColor(task.color);
+  block.append(node('span',task.text));
+  block.setAttribute('aria-label',task.text+(task.done?' · 완료됨 · 누르면 되돌리기, 길게 누르면 수정':' · 누르면 완료, 길게 누르면 수정'));
+  let hold=null,held=false,sx=0,sy=0;
+  const stopHold=()=>{clearTimeout(hold);hold=null};
+  block.addEventListener('pointerdown',e=>{held=false;sx=e.clientX;sy=e.clientY;stopHold();hold=setTimeout(()=>{hold=null;held=true;navigator.vibrate?.(10);openTodoSheet(task)},500)});
+  block.addEventListener('pointermove',e=>{if(hold&&Math.hypot(e.clientX-sx,e.clientY-sy)>10)stopHold()});
+  for(const ev of ['pointerup','pointercancel','pointerleave'])block.addEventListener(ev,stopHold);
+  block.addEventListener('contextmenu',e=>e.preventDefault());
+  block.onclick=e=>{if(held){held=false;e.preventDefault();return}finishTask(task,block)};
+  block.onkeydown=e=>{if(e.key==='e'||e.key==='F2'){e.preventDefault();openTodoSheet(task)}};
+  row.append(block);list.append(row);
+ }
+}
+function finishTask(task,block){
+ const done=!task.done;
+ block.classList.toggle('done',done);
+ updateTasks(items=>items.map(x=>x.id===task.id?{...x,done}:x));
+}
+$('weekDate').onchange=e=>loadDay(e.target.value);
+/* ---- week swipe (calendar) ---- */
+function shiftWeek(dir){const d=new Date(day+'T12:00');d.setDate(d.getDate()+dir*7);loadDay(dateKey(d));const w=$('monthDays');w.classList.remove('weekIn','weekInL','weekInR');void w.offsetWidth;w.classList.add(dir>0?'weekInR':'weekInL')}
+{let ws=null;const wd=$('monthDays');
+ wd.addEventListener('touchstart',e=>{if(e.touches.length===1)ws={x:e.touches[0].clientX,y:e.touches[0].clientY};else ws=null},{passive:true});
+ wd.addEventListener('touchend',e=>{if(!ws)return;const t=e.changedTouches[0],dx=t.clientX-ws.x,dy=t.clientY-ws.y;ws=null;if(Math.abs(dx)>50&&Math.abs(dx)>Math.abs(dy)*1.4){e.preventDefault();shiftWeek(dx<0?1:-1)}},{passive:false});
+ wd.addEventListener('touchcancel',()=>{ws=null});}
+for(const [id,offset] of [['monthPrev',-1],['monthNext',1]])$(id).onclick=()=>shiftWeek(offset);
+/* ---- PC: keys + horizontal trackpad scroll ---- */
+function stepDay(dir){if(slide)return;previewDay(dir);requestAnimationFrame(()=>requestAnimationFrame(()=>settleSlide(true)))}
+const typing=t=>t&&(t.isContentEditable||/^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName));
+document.addEventListener('keydown',e=>{
+ if(e.defaultPrevented||e.metaKey||e.ctrlKey||e.altKey||typing(e.target)||document.querySelector('dialog[open]'))return;
+ const onTable=!$('table').hidden,onCal=!calendarPanel.hidden;
+ if(e.key==='ArrowLeft'||e.key==='ArrowRight'){const dir=e.key==='ArrowRight'?1:-1;if(onTable){e.preventDefault();stepDay(dir)}else if(onCal){e.preventDefault();shiftWeek(dir)}}
+ else if((e.key==='z'||e.key==='Z')&&onTable&&!e.repeat){e.preventDefault();setCompact(!compactMode)}
+});
+{let acc=0,idle=null,cool=0;
+ window.addEventListener('wheel',e=>{
+  if(e.ctrlKey||document.querySelector('dialog[open]'))return;
+  if(Math.abs(e.deltaX)<=Math.abs(e.deltaY))return;
+  const onTable=!$('table').hidden,onCal=!calendarPanel.hidden&&e.target.closest&&e.target.closest('#monthDays');
+  if(!onTable&&!onCal)return;
+  e.preventDefault();clearTimeout(idle);idle=setTimeout(()=>{acc=0},180);
+  if(Date.now()<cool)return;acc+=e.deltaX;
+  if(Math.abs(acc)>90){const dir=acc>0?1:-1;acc=0;cool=Date.now()+650;if(onTable)stepDay(dir);else shiftWeek(dir)}
+ },{passive:false});}
+
+
+let todoEdit=null,todoColor=palette[0];
+function chooseTodoColor(c){todoColor=c;$('todoPanel').style.background=blockColor(c);for(const b of $('todoColors').querySelectorAll('.swatch'))b.setAttribute('aria-pressed',String(b.dataset.color===c))}
+for(const [i,c] of palette.entries()){const b=node('button','');b.type='button';b.className='swatch';b.style.background=blockColor(c);b.dataset.color=c;b.setAttribute('aria-label',['오렌지','청록빛 블루','올리브 그린','핑크','머스터드 옐로','라일락','코랄 레드'][i]);b.onclick=()=>chooseTodoColor(c);$('todoColors').append(b)}
+function todoAutoColor(){const items=tasksOn(day),used=items.map(t=>t.color);return palette.find(c=>!used.includes(c))||palette[items.length%palette.length]}
+function openTodoSheet(task){
+ todoEdit=task||null;
+ $('todoHeading').textContent=formatDay(day);$('todoSheet').setAttribute('aria-label',task?'할 일 수정':'할 일 추가');$('todoSave').textContent=task?'저장':'추가';$('todoDel').hidden=!task;
+ $('todoText').value=task?task.text:'';chooseTodoColor(task?.color||todoAutoColor());
+ $('todoDate').textContent=formatDay(day);$('todoSave').disabled=!$('todoText').value.trim();
+ $('todoSheet').showModal();fitSheet();
+ if(task)$('todoHeading').focus();else $('todoText').focus();
+}
+function saveTodo(){
+ const text=$('todoText').value.trim();if(!text){$('todoText').focus();return}
+ if(todoEdit){const id=todoEdit.id;updateTasks(items=>items.map(x=>x.id===id?{...x,text,color:todoColor}:x))}
+ else updateTasks(items=>[...items,{id:crypto.randomUUID(),text,done:false,color:todoColor}]);
+ $('todoSheet').close();
+}
+function showTaskInput(open){if(open)openTodoSheet();else if($('todoSheet').open)$('todoSheet').close()}
+$('addTodo').onclick=()=>openTodoSheet();
+$('todoText').oninput=()=>{$('todoSave').disabled=!$('todoText').value.trim()};
+$('todoText').onkeydown=e=>{if(e.key==='Enter'&&!e.isComposing){e.preventDefault();saveTodo()}};
+$('todoSheet').querySelector('form').onsubmit=e=>{e.preventDefault();saveTodo()};
+$('todoSave').onclick=saveTodo;$('todoCancel').onclick=()=>$('todoSheet').close();
+$('todoDel').onclick=()=>{const id=todoEdit.id;updateTasks(items=>items.filter(x=>x.id!==id));$('todoSheet').close()};
+guardBackdrop($('todoSheet'));
+$('todoHeading').tabIndex=-1;
+const views=['calendar','table','settings'];
+function setView(selected){if(selected!=='table'&&$('pinchHint'))$('pinchHint').hidden=true;
+ dateSwipe=null;clearSlide();
+ for(const view of views){
+  const active=view===selected;
+  $(view).hidden=!active;
+  $(view+'Btn').setAttribute('aria-pressed',active);
+ }
+ document.querySelector('.dayHeader').hidden=['calendar','settings'].includes(selected);
+ if(selected==='calendar')renderCalendar();else showTaskInput(false);
+ applyCompact();
+ if(selected==='table')layoutLabels($('grid'));
+}
+for(const view of views)$(view+'Btn').onclick=()=>setView(view);
+$('date').onchange=e=>loadDay(e.target.value);
+function selectedSlots(a,b){
+ const first=Math.min(a,b),last=Math.max(a,b);
+ const indices=[];
+ for(let i=first;i<=last;i++)indices.push(i);
+ return indices;
+}
+function highlight(){
+ const layer=$('selection'),gridRect=grid.getBoundingClientRect();
+ const indices=selectedSlots(drag.a,drag.b);
+ const runs=[];
+ for(const i of indices){
+  const row=i>>1,left=i%2;
+  const previous=runs.at(-1);
+  if(previous&&previous.bottom===row&&previous.right===left-1)previous.right=left;
+  else runs.push({top:row,bottom:row,left,right:left});
+ }
+ const areas=[];
+ for(const run of runs){
+  const previous=areas.at(-1);
+  if(previous&&previous.bottom+1===run.top&&previous.left===run.left&&previous.right===run.right)previous.bottom=run.bottom;
+  else areas.push(run);
+ }
+ layer.replaceChildren();
+ for(const area of areas){
+  const first=cells[area.top*2+area.left].getBoundingClientRect();
+  const last=cells[area.bottom*2+area.right].getBoundingClientRect();
+  const mark=node('i','');
+  Object.assign(mark.style,{left:first.left-gridRect.left+'px',top:first.top-gridRect.top-grid.clientTop+'px',width:last.right-first.left+'px',height:last.bottom-first.top+'px'});
+  layer.append(mark);
+ }
+ layer.hidden=false;
+}
+const grid=$('grid');
+function trackCell(x,y){
+ const rect=cells[0].getBoundingClientRect();
+ const row=Math.max(0,Math.min(23,Math.floor((y-rect.top)/rect.height)));
+ drag.b=row*2+Number(x>=rect.right);
+ highlight();
+}
+let holdTimer;
+let dateSwipe=null;
+function resetDrag(){
+ clearTimeout(holdTimer);
+ drag=null;
+ $('selection').hidden=true;
+}
+function finishDrag(){
+ const {a,b}=drag;
+ resetDrag();
+ openEditor(selectedSlots(a,b),a===b);
+}
+const HOLD_MS=500;
+function startHold(input,e,i,x,y){
+ resetDrag();
+ const press={...input,a:i,b:i,x,y,started:e.timeStamp,painting:false};
+ drag=press;
+ holdTimer=setTimeout(()=>{
+  if(drag!==press||slide)return;
+  dateSwipe=null;press.painting=true;highlight();
+ },HOLD_MS);
+}
+function beforeHold(x,y){
+ if(drag.painting)return false;
+ if(Math.hypot(x-drag.x,y-drag.y)>5)resetDrag();
+ return true;
+}
+grid.onpointerdown=e=>{
+ if(e.pointerType==='touch'||!e.isPrimary||e.button!==0||!e.target.matches('.cell'))return;
+ const i=Number(e.target.dataset.i);
+ startHold({id:e.pointerId},e,i,e.clientX,e.clientY);
+ grid.setPointerCapture(e.pointerId);
+};
+grid.onpointermove=e=>{
+ if(drag&&e.pointerType!=='touch'&&e.pointerId===drag.id&&!beforeHold(e.clientX,e.clientY))trackCell(e.clientX,e.clientY);
+};
+grid.onpointercancel=grid.onlostpointercapture=e=>{
+ if(drag&&e.pointerType!=='touch'&&e.pointerId===drag.id)resetDrag();
+};
+grid.onpointerup=e=>{
+ if(!drag||e.pointerType==='touch'||drag.id!==e.pointerId)return;
+ if(!drag.painting||e.timeStamp-drag.started<HOLD_MS){resetDrag();return}
+ trackCell(e.clientX,e.clientY);
+ finishDrag();
+};
+grid.addEventListener('touchstart',e=>{
+ resetDrag();
+ if(e.touches.length!==1||!e.target.matches('.cell'))return;
+ const t=e.touches[0],i=Number(e.target.dataset.i);
+ startHold({touchId:t.identifier},e,i,t.clientX,t.clientY);
+},{passive:false});
+grid.addEventListener('touchmove',e=>{
+ if(!drag||e.touches.length!==1)return;
+ const t=e.touches[0];
+ if(t.identifier!==drag.touchId)return;
+ if(beforeHold(t.clientX,t.clientY))return;
+ if(!e.cancelable){resetDrag();return}
+ e.preventDefault();
+ trackCell(t.clientX,t.clientY);
+},{passive:false});
+grid.addEventListener('touchend',e=>{
+ if(!drag)return;
+ const t=Array.from(e.changedTouches).find(t=>t.identifier===drag.touchId);
+ if(!t)return;
+ if(e.cancelable)e.preventDefault();
+ if(!drag.painting||e.timeStamp-drag.started<HOLD_MS){resetDrag();return}
+ trackCell(t.clientX,t.clientY);
+ finishDrag();
+},{passive:false});
+grid.addEventListener('touchcancel',resetDrag);
+grid.oncontextmenu=e=>{if(drag&&drag.touchId!==undefined)e.preventDefault()};
+const page=document.querySelector('.page');
+const stage=page.parentElement;
+let slide=null;
+function clearSlide(){
+ if(!slide)return;
+ clearTimeout(slide.timer);
+ slide.preview.remove();
+ page.style.transition='';
+ page.style.transform='';
+ stage.classList.remove('sliding');
+ slide=null;
+}
+function previewDay(direction){
+ if(slide?.direction===direction)return;
+ clearSlide();
+ const date=new Date(day+'T12:00');
+ date.setDate(date.getDate()+direction);
+ const key=dateKey(date);
+ const preview=page.cloneNode(true);
+ preview.classList.add('dayPreview');
+ preview.inert=true;
+ preview.setAttribute('aria-hidden','true');
+ const chart=preview.querySelector('#ring');
+ preview.querySelector('#dateLabel').textContent=formatDayFull(key);
+ preview.querySelector('#selection').hidden=true;
+ for(const el of preview.querySelectorAll('[id]')){
+  el.classList.add('preview-'+el.id);el.removeAttribute('id');
+ }
+ const pdata=read('.'+key)||Array(48).fill(null);render(pdata,preview.querySelectorAll('.cell'),chart);fillBigDay(preview,key,pdata);fillDayInfo(preview,key,pdata);markNowHour(preview,key);
+ stage.append(preview);
+ const pad=getComputedStyle(stage).paddingLeft;preview.style.left=pad;preview.style.right='auto';preview.style.width=page.getBoundingClientRect().width+'px';
+ layoutLabels(preview.querySelector('.preview-grid'));
+ stage.classList.add('sliding');
+ slide={direction,key,preview,width:Math.max(stage.getBoundingClientRect().width,page.getBoundingClientRect().width+24)+8};
+}
+function positionSlide(dx){
+ const offset=Math.max(-slide.width,Math.min(slide.width,dx));
+ page.style.transform='translate3d('+offset+'px,0,0)';
+ slide.preview.style.transform='translate3d('+(offset+slide.direction*slide.width)+'px,0,0)';
+}
+function settleSlide(commit){
+ if(!slide)return;
+ const current=slide;
+ current.finishing=true;
+ const finish=()=>{
+  if(slide!==current)return;
+  clearSlide();
+  if(commit)loadDay(current.key);
+ };
+ if(matchMedia('(prefers-reduced-motion: reduce)').matches){finish();return}
+ page.style.transition=current.preview.style.transition='transform 180ms ease-out';
+ positionSlide(commit?-current.direction*current.width:0);
+ current.timer=setTimeout(finish,190);
+}
+for(const surface of [$('table'),$('clock')]){
+ surface.addEventListener('touchstart',e=>{
+  const t=e.touches[0];
+  if(slide?.finishing){resetDrag();return}
+  clearSlide();
+  dateSwipe=e.touches.length===1?{id:t.identifier,x:t.clientX,y:t.clientY}:null;
+ },{passive:true});
+ surface.addEventListener('touchmove',e=>{
+  if(!dateSwipe||e.touches.length!==1)return;
+  const t=e.touches[0],dx=t.clientX-dateSwipe.x,dy=Math.abs(t.clientY-dateSwipe.y);
+  if(t.identifier!==dateSwipe.id||(!slide&&dy>10&&dy>=Math.abs(dx))){dateSwipe=null;clearSlide();return}
+  if(!slide&&(Math.abs(dx)<8||Math.abs(dx)<=dy*1.5))return;
+  if(!e.cancelable){dateSwipe=null;clearSlide();return}
+  e.preventDefault();
+  resetDrag();
+  previewDay(dx<0?1:-1);
+  positionSlide(dx);
+ },{passive:false});
+ surface.addEventListener('touchend',e=>{
+  const start=dateSwipe;
+  dateSwipe=null;
+  if(!start||!slide||slide.finishing)return;
+  if(e.cancelable)e.preventDefault();
+  const t=Array.from(e.changedTouches).find(t=>t.identifier===start.id);
+  const travel=t?(start.x-t.clientX)*slide.direction:0;
+  settleSlide(travel>=Math.min(90,Math.max(52,slide.width*.18)));
+ },{passive:false});
+ surface.addEventListener('touchcancel',()=>{dateSwipe=null;clearSlide()});
+}
+const PAL_NAMES=['오렌지','청록빛 블루','올리브 그린','핑크','머스터드 옐로','라일락','코랄 레드'];
+let ed=null,colorTouched=false,toastTimer=null;
+function choose(c,manual){
+ color=c;if(manual)colorTouched=true;
+ for(const b of $('colors').querySelectorAll('.swatch'))b.setAttribute('aria-pressed',String(b.dataset.color===c));
+ $('custom').value=/^#[0-9a-f]{6}$/i.test(c)?c:'#000000';
+ $('namePanel').style.background=blockColor(c);
+ previewDraft();
+}
+for(const [i,c] of palette.entries()){const b=node('button','');b.type='button';b.className='swatch';b.style.background=blockColor(c);b.dataset.color=c;b.setAttribute('aria-label',PAL_NAMES[i]);b.onclick=()=>choose(c,true);$('colors').append(b)}
+const custom=node('input','');custom.type='color';custom.id='custom';custom.tabIndex=-1;custom.setAttribute('aria-hidden','true');custom.oninput=custom.onchange=()=>choose(custom.value,true);const customWrap=node('span',''),customBtnEl=$('customBtn');customWrap.className='customWrap';customBtnEl.replaceWith(customWrap);customWrap.append(customBtnEl,custom);
+$('customBtn').onclick=()=>{try{custom.showPicker()}catch{custom.click()}};
+const recentItems=()=>(read('.recent')||[]);
+function autoColor(){
+ const items=recentItems();let best=palette[0],score=-1;
+ for(const c of palette){const at=items.findIndex(x=>x.color===c);const s=at<0?Infinity:at;if(s>score){score=s;best=c}}
+ return best;
+}
+function draftSlots(){
+ const data=(slots||[]).slice();
+ if(!ed)return data;
+ const name=$('name').value.trim();
+ if(ed.uniformEdit)for(const i of ed.orig)if(i<ed.start||i>=ed.end)data[i]=null;
+ for(let i=ed.start;i<ed.end;i++)data[i]={name:name||'새 활동',color};
+ return data;
+}
+function previewDraft(){if(ed&&$('editor').open)render(draftSlots())}
+function updateSheet(){
+ const n=ed.end-ed.start;
+ $('range').textContent=hour(ed.start)+' – '+hour(ed.end);
+ const src=ed.orig&&ed.orig.length?slots[ed.orig[0]]:null,tot=src?slots.filter(x=>x&&x.name===src.name&&x.color===src.color).length:0;$('duration').textContent=duration(n)+(tot>n?' · 총 '+duration(tot):'');
+ $('del').hidden=!(ed.orig.some(i=>slots[i]));
+ $('save').disabled=!$('name').value.trim();
+ previewDraft();
+}
+function fitSheet(){
+ const vv=window.visualViewport;
+ for(const sheet of [$('editor'),$('todoSheet')]){
+  if(!sheet||!sheet.open)continue;
+  if(!vv){sheet.style.bottom='0px';continue}
+  const kb=Math.max(0,window.innerHeight-vv.height-vv.offsetTop);
+  sheet.style.bottom=kb+'px';sheet.style.maxHeight=Math.min(640,vv.height-24)+'px';
+ }
+}
+if(window.visualViewport){visualViewport.addEventListener('resize',fitSheet);visualViewport.addEventListener('scroll',fitSheet)}
+function openEditor(indices,expand){
+ const first=indices[0],s=slots[first];let sel=indices.slice();
+ if(expand&&s){let start=first,end=first;while(same(slots[start-1],s))start--;while(same(slots[end+1],s))end++;sel=Array.from({length:end-start+1},(_,j)=>start+j)}
+ const uniformEdit=!!s&&sel.every(i=>same(slots[i],s));
+ ed={orig:sel,start:Math.min(...sel),end:Math.max(...sel)+1,uniformEdit};picked=sel;
+ $('heading').textContent=uniformEdit?'활동 수정':'활동 등록';
+ $('name').value=uniformEdit?s.name:'';
+ colorTouched=uniformEdit;
+ hideSuggest();
+ color=uniformEdit?s.color:autoColor();choose(color);
+ document.documentElement.classList.add('sheetOpen');
+ const target=!$('table').hidden&&cells[ed.start];
+ if(target){const y=target.getBoundingClientRect().top+window.scrollY-120;window.scrollTo({top:Math.max(0,y)})}
+ $('editor').showModal();fitSheet();
+ updateSheet();
+ if(uniformEdit)$('heading').focus();else{$('name').focus();showSuggest()}
+}
+function hideSuggest(){$('suggest').hidden=true;$('suggest').replaceChildren();$('name').setAttribute('aria-expanded','false')}
+const dayTodos=()=>tasksOn(day).filter(t=>!t.done).map(t=>({name:t.text.trim().slice(0,60),color:t.color||null,todo:true}));
+function showSuggest(){
+ const q=$('name').value.trim(),list=$('suggest');list.replaceChildren();
+ const lower=q.toLowerCase(),todos=dayTodos();
+ if(!q&&(!ed||ed.uniformEdit||!todos.length)){hideSuggest();return}
+ const match=x=>!q||x.name.toLowerCase().includes(lower);
+ const rank=(a,b)=>b.name.toLowerCase().startsWith(lower)-a.name.toLowerCase().startsWith(lower);
+ const todoHits=todos.filter(match).sort(rank).slice(0,q?3:5),seen=new Set(todoHits.map(x=>x.name));
+ const recentHits=q?recentItems().filter(x=>match(x)&&!seen.has(x.name)).sort(rank).slice(0,4):[];
+ const all=[...todoHits,...recentHits].filter(x=>x.name!==q).slice(0,3),exact=true;
+ for(const item of all){
+  const li=node('li',''),b=node('button','');b.type='button';
+  b.append(dot(item.color||'#d0d0cb'),node('span',item.name));if(item.todo)b.append(node('small','TO DO'));
+  b.onpointerdown=e=>e.preventDefault();
+  b.onclick=()=>{$('name').value=item.name;choose(item.color||autoColor(),!!item.color);hideSuggest();updateSheet()};
+  li.append(b);list.append(li);
+ }
+ if(q&&!exact){
+  const li=node('li',''),b=node('button','');b.type='button';
+  const plus=node('span','+');plus.className='plus';
+  b.append(plus,node('span','‘'+q+'’ 새 활동으로'),node('small',colorTouched?'고른 색 사용':'안 쓴 색 자동 지정'));
+  b.onpointerdown=e=>e.preventDefault();
+  b.onclick=()=>{if(!colorTouched)choose(autoColor());hideSuggest();updateSheet()};
+  li.append(b);list.append(li);
+ }
+ list.hidden=!list.children.length;$('name').setAttribute('aria-expanded',String(!list.hidden));
+}
+$('name').oninput=()=>{
+ const q=$('name').value.trim(),hit=recentItems().find(x=>x.name===q)||dayTodos().find(x=>x.name===q&&x.color);
+ if(hit)choose(hit.color);else if(q&&!colorTouched)choose(autoColor());
+ showSuggest();updateSheet();
+};
+$('name').onblur=()=>setTimeout(hideSuggest,120);
+function commit(item){
+ const latest=read('.'+day)||Array(48).fill(null),before=JSON.stringify(latest);
+ if(item){
+  if(ed.uniformEdit)for(const i of ed.orig)if(i<ed.start||i>=ed.end)latest[i]=null;
+  for(let i=ed.start;i<ed.end;i++)latest[i]=item;
+ }else for(const i of ed.orig)latest[i]=null;
+ records.setItem(uid+'.'+day,JSON.stringify(latest));
+ if(item){const recent=recentItems();records.setItem(uid+'.recent',JSON.stringify([item,...recent.filter(x=>!same(x,item))].slice(0,30)))}
+ slots=latest;
+ $('editor').close();render();
+ return before;
+}
+function saveActivity(){
+ const field=$('name'),name=field.value.trim();
+ if(!name){field.focus();return}
+ commit({name,color});
+ const todo=tasksOn(day).find(t=>!t.done&&t.text.trim().slice(0,60)===name);
+ if(todo)updateTasks(items=>items.map(x=>x.id===todo.id?{...x,done:true}:x));
+}
+function showToast(text,undo){
+ clearTimeout(toastTimer);$('toastText').textContent=text;$('toast').hidden=false;
+ $('undo').onclick=()=>{undo();$('toast').hidden=true};
+ toastTimer=setTimeout(()=>{$('toast').hidden=true},6000);
+}
+$('save').onclick=saveActivity;
+$('name').onkeydown=e=>{
+ if(e.key==='Escape'&&!$('suggest').hidden){e.preventDefault();e.stopPropagation();hideSuggest();return}
+ if(e.key==='Enter'&&!e.isComposing){e.preventDefault();saveActivity()}
+};
+$('editor').querySelector('form').onsubmit=e=>{e.preventDefault();saveActivity()};
+$('del').onclick=()=>{
+ const s=slots[ed.orig.find(i=>slots[i])],label=(s?.name||'기록')+' '+hour(ed.orig[0])+'–'+hour(ed.orig.at(-1)+1),key=uid+'.'+day,editedDay=day;
+ const before=commit(null);
+ showToast(label+' 삭제됨',()=>{records.setItem(key,before);if(day===editedDay){slots=JSON.parse(before);render()}});
+};
+$('cancel').onclick=()=>$('editor').close();
+guardBackdrop($('editor'));
+window.addEventListener('storage',e=>{
+ if(!e.key||!e.key.startsWith(uid+'.')||e.newValue===null||cache.get(e.key)===e.newValue)return;
+ cache.set(e.key,e.newValue);applyExternal([e.key]);
+});
+$('editor').addEventListener('close',()=>{document.documentElement.classList.remove('sheetOpen');slots=read('.'+day)||Array(48).fill(null);render()});
+function setTheme(pref){themePref=pref;try{localStorage.setItem(THEME_KEY,pref)}catch{}applyTheme();render()}
+for(const b of document.querySelectorAll('[data-theme-choice]'))b.onclick=()=>setTheme(b.dataset.themeChoice);
+darkQuery.addEventListener('change',()=>{if(themePref==='system'){applyTheme();render()}});
+function updateTodayIcon(){$('todayNum').textContent=String(new Date().getDate())}
+updateTodayIcon();document.addEventListener('visibilitychange',()=>{if(!document.hidden)updateTodayIcon()});setInterval(updateTodayIcon,60000);
+let compactMode=false,pinch=null,hintTimer=null;
+const HINT_KEY='haru-blocks.pinchHint';
+let relayoutTimer=null;
+function settleLabels(grid){
+ grid.classList.add('resizing');clearTimeout(relayoutTimer);
+ relayoutTimer=setTimeout(()=>{layoutLabels(grid);grid.classList.remove('resizing')},260);
+}
+function applyCompact(){
+ const on=compactMode&&!$('table').hidden;
+ document.documentElement.classList.toggle('compact',on);
+ const grid=$('grid');
+ if(!on){grid.style.removeProperty('--row');grid.style.removeProperty('--label');settleLabels(grid);return}
+ window.scrollTo({top:0});
+ requestAnimationFrame(()=>{
+  const top=grid.getBoundingClientRect().top+window.scrollY,bar=document.querySelector('.bottomBar').offsetHeight;
+  const row=Math.max(14,Math.min(40,Math.floor((window.innerHeight-top-bar-10)/24)));
+  grid.style.setProperty('--row',row+'px');grid.style.setProperty('--label','12px');
+  settleLabels(grid);
+ });
+}
+function setCompact(on){
+ if(compactMode===on)return;compactMode=on;applyCompact();
+ try{localStorage.setItem(HINT_KEY,'done')}catch{}
+ hidePinchHint();
+}
+window.addEventListener('resize',()=>{if(compactMode)applyCompact()});
+document.addEventListener('touchmove',e=>{if(compactMode&&!$('table').hidden&&!document.querySelector('dialog[open]')&&e.cancelable)e.preventDefault()},{passive:false});
+const touchDist=t=>Math.hypot(t[0].clientX-t[1].clientX,t[0].clientY-t[1].clientY);
+document.addEventListener('touchstart',e=>{
+ if(e.touches.length===2&&!$('table').hidden&&!document.querySelector('dialog[open]')){pinch={d:touchDist(e.touches),done:false};resetDrag();dateSwipe=null;clearSlide()}
+},{passive:true});
+document.addEventListener('touchmove',e=>{
+ if(!pinch||pinch.done||e.touches.length!==2)return;
+ const r=touchDist(e.touches)/pinch.d;
+ if(r<0.8){setCompact(true);pinch.done=true}else if(r>1.25){setCompact(false);pinch.done=true}
+},{passive:true});
+document.addEventListener('touchend',e=>{if(e.touches.length<2)pinch=null});
+document.addEventListener('touchcancel',()=>{pinch=null});
+window.addEventListener('wheel',e=>{
+ if(!e.ctrlKey||$('table').hidden||document.querySelector('dialog[open]'))return;
+ e.preventDefault();if(Math.abs(e.deltaY)<4)return;setCompact(e.deltaY>0);
+},{passive:false});
+function hidePinchHint(){clearTimeout(hintTimer);$('pinchHint').hidden=true}
+function maybeShowPinchHint(){
+ if(!matchMedia('(any-pointer: coarse)').matches)return;
+ let seen=0;try{const v=localStorage.getItem(HINT_KEY);if(v==='done')return;seen=Number(v)||0}catch{return}
+ if(seen>=3)return;
+ try{localStorage.setItem(HINT_KEY,String(seen+1))}catch{}
+ $('pinchHint').hidden=false;hintTimer=setTimeout(hidePinchHint,6000);
+}
+$('pinchHint').onclick=hidePinchHint;
+loadDay(day);setView('table');setSyncStatus('checking');connectCloud();
+setTimeout(maybeShowPinchHint,900);
+
+function validDay(key){
+ if(!/^\d{4}-\d{2}-\d{2}$/.test(key))return false;
+ const d=new Date(key+'T12:00');
+ return !Number.isNaN(d.getTime())&&dateKey(d)===key;
+}
+function backupData(){
+ const days={},todos={};
+ for(let i=0;i<records.length;i++){
+  const key=records.key(i);
+  if(key.startsWith(uid+'.todo.')&&validDay(key.slice((uid+'.todo.').length)))todos[key.slice((uid+'.todo.').length)]=JSON.parse(records.getItem(key));
+  if(key.startsWith(uid+'.')&&validDay(key.slice(uid.length+1))){
+   const dayKey=key.slice(uid.length+1);
+   days[dayKey]=read('.'+dayKey);
+  }
+ }
+ return {format:'haru-blocks',version:2,days,todos,recent:read('.recent')||[]};
+}
+function checkBackup(data){
+ const activity=a=>a&&typeof a.name==='string'&&a.name.trim()&&a.name.length<=60&&typeof a.color==='string'&&/^#[0-9a-f]{6}$/i.test(a.color);
+ if(data?.format!=='haru-blocks'||![1,2].includes(data.version)||!data.days||typeof data.days!=='object'||Array.isArray(data.days)||!Array.isArray(data.recent)||!data.recent.every(activity))throw Error('48BLOCKS에서 다운로드한 백업 파일을 선택해 주세요.');
+ if(data.version===2&&(!data.todos||typeof data.todos!=='object'||Array.isArray(data.todos)||!Object.entries(data.todos).every(([key,items])=>validDay(key)&&Array.isArray(items)&&items.every(x=>x&&typeof x.id==='string'&&x.id&&typeof x.text==='string'&&x.text.trim()&&x.text.length<=200&&typeof x.done==='boolean'&&(x.color===undefined||(typeof x.color==='string'&&/^#[0-9a-f]{6}$/i.test(x.color)))))))throw Error('할 일 데이터의 형식이 올바르지 않아요.');
+ for(const [key,list] of Object.entries(data.days)){
+  if(!validDay(key)||!Array.isArray(list)||list.length!==48||!list.every(a=>a===null||activity(a)))throw Error('날짜 또는 활동 데이터의 형식이 올바르지 않아요.');
+ }
+}
+function mergeBackup(data){
+ checkBackup(data);
+ const changes=new Map();let added=0,conflicts=0;
+ for(const [key,items] of Object.entries(data.version===2?data.todos:{})){
+  const merged=new Map(tasksOn(key).map(t=>[t.id,t]));
+  for(const t of items)if(!merged.has(t.id))merged.set(t.id,t.color?{id:t.id,text:t.text,done:t.done,color:t.color}:{id:t.id,text:t.text,done:t.done});
+  changes.set(uid+'.todo.'+key,JSON.stringify([...merged.values()]));
+ }
+ for(const [key,incoming] of Object.entries(data.days)){
+  const current=read('.'+key)||Array(48).fill(null);
+  const merged=current.map((old,i)=>{
+   const next=incoming[i];
+   if(!old&&next){added++;return {name:next.name,color:next.color}}
+   if(old&&next&&!same(old,next))conflicts++;
+   return old;
+  });
+  changes.set(uid+'.'+key,JSON.stringify(merged));
+ }
+ const recent=new Map();
+ for(const a of [...(read('.recent')||[]),...data.recent]){
+  recent.set(JSON.stringify([a.name,a.color]),{name:a.name,color:a.color});
+ }
+ changes.set(uid+'.recent',JSON.stringify([...recent.values()]));
+ const undo=[];
+ try{
+  for(const [key,value] of changes){
+   const old=records.getItem(key);
+   if(old===value)continue;
+   records.setItem(key,value);undo.push([key,old]);
+  }
+ }catch(error){
+  for(const [key,old] of undo.reverse())if(old===null)records.removeItem(key);else records.setItem(key,old);
+  throw Error('브라우저 저장 공간을 확인해 주세요.');
+ }
+ return {added,conflicts};
+}
+function popup(message){$('alertText').textContent=message;if(!$('alertBox').open)$('alertBox').showModal();$('alertOk').focus()}
+$('alertOk').onclick=()=>$('alertBox').close();
+function notifyUser(message){$('notice').textContent=message;$('notice').hidden=false}
+let downloadsApi=null;
+if(window.claude?.use)claude.use('downloads').then(api=>{downloadsApi=api}).catch(()=>{});
+$('download').onclick=async()=>{
+ let text;
+ try{const data=backupData();checkBackup(data);text=JSON.stringify(data)}
+ catch{notifyUser('기록을 다운로드할 수 없어요. 저장된 기록을 확인해 주세요.');return}
+ const filename='48BLOCKS-'+dateKey(new Date())+'.json';
+ if(window.claude?.use){
+  if(!downloadsApi){notifyUser('이 화면에서는 파일을 내려받을 수 없어요.');return}
+  try{await downloadsApi.save({filename,data:text})}
+  catch(error){
+   if(error?.code==='declined')return;
+   notifyUser(error?.code==='rate_limited'?'잠시 후 다시 시도해 주세요.':'백업 파일을 내려받지 못했어요.');
+  }
+  return;
+ }
+ const url=URL.createObjectURL(new Blob([text],{type:'application/json'}));
+ const a=document.createElement('a');a.href=url;a.download=filename;
+ document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),60000);
+};
+$('upload').onclick=()=>$('backupFile').click();
+$('backupFile').onchange=async e=>{
+ const file=e.target.files[0];if(!file)return;
+ try{
+  const data=JSON.parse(await file.text());
+  const {added,conflicts}=mergeBackup(data);loadDay(day);
+  popup((!local&&!cloud?'임시로 불러왔어요. 닫기 전에 기록을 다운로드해 주세요. ':'백업을 불러왔어요. ')+added+'칸 추가'+(conflicts?' · 시간이 겹친 '+conflicts+'칸은 기존 기록 유지':''));
+ }catch(error){popup(error instanceof SyntaxError?'JSON 백업 파일을 읽을 수 없어요.':error.message)}
+ finally{e.target.value=''}
+};
+
+function preventPinch(event){
+ if(event.cancelable)event.preventDefault();
+}
+for(const type of ['gesturestart','gesturechange']){
+ document.addEventListener(type,preventPinch,{passive:false});
+}
+document.addEventListener('touchmove',event=>{
+ if(event.touches.length>1)preventPinch(event);
+},{passive:false});
+</script></body></html>
