@@ -442,7 +442,15 @@ html.compact #nowLine span{position:absolute;right:12px;bottom:4px;font-family:v
 #editor #suggest small{font-family:var(--mono);font-weight:700;font-size:10px;color:var(--muted,#8c8c88)}
 #editor #suggest button{height:40px!important}
 #editor .namePanel{z-index:5}
-</style></head><body><div class="dayStage"><div class="page"><header class="dayHeader"><h1><label class="dayPicker"><span id="dateLabel"></span><span id="bigDay" aria-hidden="true"><b class="bdNum"></b><span class="bdMeta"></span><span class="bdSum"></span></span><input type="date" id="date" aria-label="날짜 선택"></label></h1><span id="dayInfo" class="dayInfo" aria-live="off"></span></header><p id="notice" role="status" hidden></p><main><section class="sheet"><section id="calendar" hidden><div class="monthBar"><label class="weekPicker"><h2 id="monthTitle"></h2><input type="date" id="weekDate" aria-label="날짜로 이동"></label><button type="button" id="monthPrev" aria-label="이전 주">‹</button><button type="button" id="monthNext" aria-label="다음 주">›</button></div><div id="monthDays" class="weekDays" aria-label="이번 주 날짜 선택"></div><section class="agenda"><div class="agendaHead"><h3 id="todoHead">TO DO</h3><button id="addTodo" type="button" aria-label="할 일 추가" aria-haspopup="dialog">+</button></div><ul id="todoList"></ul></section></section><div id="table"><div id="grid"><div id="selection" hidden></div></div></div><div id="clock" hidden><div class="dial"><b>0</b><b>6</b><b>12</b><b>18</b><div id="ring"></div></div></div><section id="settings" hidden aria-labelledby="settingsTitle"><h2 id="settingsTitle">SETTINGS</h2><section class="setGroup"><h3>THEME</h3><div class="themeRow" role="radiogroup" aria-label="테마"><button type="button" role="radio" data-theme-choice="system">SYSTEM</button><button type="button" role="radio" data-theme-choice="light">LIGHT</button><button type="button" role="radio" data-theme-choice="dark">DARK</button></div><p class="setNote">시스템을 고르면 기기 설정에 맞춰 바뀌어요.</p></section><section class="setGroup"><h3>STORAGE</h3><p id="syncStatus" class="setNote" role="status">저장 방식을 확인하고 있어요.</p></section><section class="setGroup"><h3>BACKUP</h3><button type="button" id="download" class="setRow"><b>백업 다운로드</b><small>모든 날짜의 기록, 최근 활동과 할 일을 JSON 파일로 보관해요.</small><i aria-hidden="true">↓ SAVE</i></button><button type="button" id="upload" class="setRow"><b>백업 복원</b><small>백업 파일에서 기록을 가져와요. 시간이 겹치면 이 기기의 기록을 유지해요.</small><i aria-hidden="true">↑ OPEN</i></button><input id="backupFile" type="file" accept=".json,application/json" hidden></section></section></section></main></div></div><nav class="bottomBar" aria-label="보기 전환"><div class="tabs"><button id="calendarBtn" title="캘린더" aria-label="캘린더"><span class="todayNum" id="todayNum" aria-hidden="true"></span></button><button id="tableBtn" title="표" aria-label="표"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17"/></svg></button><button id="settingsBtn" aria-label="설정" title="설정"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><defs><mask id="gearHole"><rect width="24" height="24" fill="#fff"/><circle cx="12" cy="12" r="3.2" fill="#000"/></mask></defs><g mask="url(#gearHole)"><circle cx="12" cy="12" r="7.4"/><rect x="10" y="1.5" width="4" height="21"/><rect x="10" y="1.5" width="4" height="21" transform="rotate(45 12 12)"/><rect x="10" y="1.5" width="4" height="21" transform="rotate(90 12 12)"/><rect x="10" y="1.5" width="4" height="21" transform="rotate(135 12 12)"/></g></svg></button></div></nav><dialog id="todoSheet" aria-labelledby="todoHeading"><form><div class="sheetHandle" aria-hidden="true"></div><div class="sheetBody"><div class="namePanel" id="todoPanel"><div class="sheetHead"><h2 id="todoHeading"></h2><span id="todoDate" hidden></span><button type="button" id="todoDel" aria-label="할 일 삭제" hidden><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13M10 11v6M14 11v6"/></svg></button></div><label for="todoText" class="fieldLabel srOnly">할 일</label><input id="todoText" maxlength="200" autocomplete="off" placeholder="무엇을 할까요?"></div><span class="fieldLabel srOnly">색상</span><div id="todoColors"></div></div><footer><button type="button" id="todoCancel">취소</button><button type="button" id="todoSave">추가</button></footer></form></dialog><dialog id="alertBox" aria-labelledby="alertText"><p id="alertText"></p><div class="alertActions"><button type="button" id="alertOk">확인</button></div></dialog><dialog id="editor" aria-labelledby="heading"><form><div class="sheetHandle" aria-hidden="true"></div><div class="sheetBody"><h2 id="heading" class="srOnly" tabindex="-1">활동 등록</h2><div class="namePanel" id="namePanel"><div class="sheetHead"><p id="range"></p><span class="headRight"><span id="duration"></span><button type="button" id="del" aria-label="이 블록 삭제"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13M10 11v6M14 11v6"/></svg></button></span></div><label for="name" class="fieldLabel srOnly">활동 이름</label><input id="name" maxlength="60" autocomplete="off" placeholder="무엇을 했나요?" role="combobox" aria-autocomplete="list" aria-controls="suggest" aria-expanded="false"><ul id="suggest" aria-label="이름 추천" hidden></ul></div><span class="fieldLabel srOnly">색상</span><div id="colors"></div><div class="colorHead"><button type="button" id="customBtn">CUSTOM +</button></div></div><footer><button type="button" id="cancel">취소</button><button type="button" id="save">저장</button></footer></form></dialog><div id="pinchHint" role="status" hidden><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="7" cy="7" r="3"/><circle cx="17" cy="17" r="3"/><path d="M10 10l4 4M14 6h4v4M10 18H6v-4"/></svg><span>두 손가락으로 오므리면 하루 전체 보기</span></div><div id="toast" role="status" hidden><span id="toastText"></span><button type="button" id="undo">되돌리기</button></div><script>'use strict';
+/* tighter title area (DAY + CAL stay aligned) */
+html:not(.compact) .dayHeader{padding:20px 0 18px!important}
+#calendar .monthBar{padding:20px 0 0!important;justify-content:space-between}
+#calendar .weekDays{margin-top:18px!important}
+
+/* example day */
+html.example #grid .cell,html.example #grid .blockLabel{pointer-events:none}
+html.example #nowLine,html.example #pinchHint{display:none!important}
+</style></head><body><div class="dayStage"><div class="page"><header class="dayHeader"><h1><label class="dayPicker"><span id="dateLabel"></span><span id="bigDay" aria-hidden="true"><b class="bdNum"></b><span class="bdMeta"></span><span class="bdSum"></span></span><input type="date" id="date" aria-label="날짜 선택"></label></h1><span id="dayInfo" class="dayInfo" aria-live="off"></span></header><p id="notice" role="status" hidden></p><main><section class="sheet"><section id="calendar" hidden><div class="monthBar"><label class="weekPicker"><h2 id="monthTitle"></h2><input type="date" id="weekDate" aria-label="날짜로 이동"></label><span id="weekInfo" class="dayInfo"></span><button type="button" id="monthPrev" aria-label="이전 주">‹</button><button type="button" id="monthNext" aria-label="다음 주">›</button></div><div id="monthDays" class="weekDays" aria-label="이번 주 날짜 선택"></div><section class="agenda"><div class="agendaHead"><h3 id="todoHead">TO DO</h3><button id="addTodo" type="button" aria-label="할 일 추가" aria-haspopup="dialog">+</button></div><ul id="todoList"></ul></section></section><div id="table"><div id="grid"><div id="selection" hidden></div></div></div><div id="clock" hidden><div class="dial"><b>0</b><b>6</b><b>12</b><b>18</b><div id="ring"></div></div></div><section id="settings" hidden aria-labelledby="settingsTitle"><h2 id="settingsTitle">SETTINGS</h2><section class="setGroup"><h3>THEME</h3><div class="themeRow" role="radiogroup" aria-label="테마"><button type="button" role="radio" data-theme-choice="system">SYSTEM</button><button type="button" role="radio" data-theme-choice="light">LIGHT</button><button type="button" role="radio" data-theme-choice="dark">DARK</button></div><p class="setNote">시스템을 고르면 기기 설정에 맞춰 바뀌어요.</p></section><section class="setGroup"><h3>STORAGE</h3><p id="syncStatus" class="setNote" role="status">저장 방식을 확인하고 있어요.</p></section><section class="setGroup"><h3>BACKUP</h3><button type="button" id="download" class="setRow"><b>내보내기</b><small>모든 날짜의 기록, 최근 활동과 할 일을 JSON 파일로 보관해요.</small><i aria-hidden="true">↓ SAVE</i></button><button type="button" id="upload" class="setRow"><b>불러오기</b><small>백업 파일에서 기록을 가져와요. 시간이 겹치면 이 기기의 기록을 유지해요.</small><i aria-hidden="true">↑ OPEN</i></button><input id="backupFile" type="file" accept=".json,application/json" hidden></section></section></section></main></div></div><nav class="bottomBar" aria-label="보기 전환"><div class="tabs"><button id="calendarBtn" title="캘린더" aria-label="캘린더"><span class="todayNum" id="todayNum" aria-hidden="true"></span></button><button id="tableBtn" title="표" aria-label="표"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17"/></svg></button><button id="settingsBtn" aria-label="설정" title="설정"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><defs><mask id="gearHole"><rect width="24" height="24" fill="#fff"/><circle cx="12" cy="12" r="3.2" fill="#000"/></mask></defs><g mask="url(#gearHole)"><circle cx="12" cy="12" r="7.4"/><rect x="10" y="1.5" width="4" height="21"/><rect x="10" y="1.5" width="4" height="21" transform="rotate(45 12 12)"/><rect x="10" y="1.5" width="4" height="21" transform="rotate(90 12 12)"/><rect x="10" y="1.5" width="4" height="21" transform="rotate(135 12 12)"/></g></svg></button></div></nav><dialog id="todoSheet" aria-labelledby="todoHeading"><form><div class="sheetHandle" aria-hidden="true"></div><div class="sheetBody"><div class="namePanel" id="todoPanel"><div class="sheetHead"><h2 id="todoHeading"></h2><span id="todoDate" hidden></span><button type="button" id="todoDel" aria-label="할 일 삭제" hidden><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13M10 11v6M14 11v6"/></svg></button></div><label for="todoText" class="fieldLabel srOnly">할 일</label><input id="todoText" maxlength="200" autocomplete="off" placeholder="무엇을 할까요?"></div><span class="fieldLabel srOnly">색상</span><div id="todoColors"></div></div><footer><button type="button" id="todoCancel">취소</button><button type="button" id="todoSave">추가</button></footer></form></dialog><dialog id="alertBox" aria-labelledby="alertText"><p id="alertText"></p><div class="alertActions"><button type="button" id="alertOk">확인</button></div></dialog><dialog id="editor" aria-labelledby="heading"><form><div class="sheetHandle" aria-hidden="true"></div><div class="sheetBody"><h2 id="heading" class="srOnly" tabindex="-1">활동 등록</h2><div class="namePanel" id="namePanel"><div class="sheetHead"><p id="range"></p><span class="headRight"><span id="duration"></span><button type="button" id="del" aria-label="이 블록 삭제"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13M10 11v6M14 11v6"/></svg></button></span></div><label for="name" class="fieldLabel srOnly">활동 이름</label><input id="name" maxlength="60" autocomplete="off" placeholder="무엇을 했나요?" role="combobox" aria-autocomplete="list" aria-controls="suggest" aria-expanded="false"><ul id="suggest" aria-label="이름 추천" hidden></ul></div><span class="fieldLabel srOnly">색상</span><div id="colors"></div><div class="colorHead"><button type="button" id="customBtn">CUSTOM +</button></div></div><footer><button type="button" id="cancel">취소</button><button type="button" id="save">저장</button></footer></form></dialog><div id="pinchHint" role="status" hidden><span>두 손가락으로 모아 한눈에 보기</span></div><div id="toast" role="status" hidden><span id="toastText"></span><button type="button" id="undo">되돌리기</button></div><script>'use strict';
 function guardBackdrop(d){
  let downOnBackdrop=false,openedAt=0;
  new MutationObserver(()=>{if(d.open)openedAt=performance.now()}).observe(d,{attributes:true,attributeFilter:['open']});
@@ -602,13 +610,24 @@ function dayInfoText(key,n){
  return n+'/48 BLOCKS';
 }
 function fillDayInfo(root,key,data){const el=root.querySelector('#dayInfo,.preview-dayInfo');if(el)el.textContent=dayInfoText(key,data.filter(Boolean).length)}
-setInterval(()=>{if(!compactMode||document.hidden)return;const el=$('bigDay');if(el&&dateKey(new Date())===day)el.querySelector('.bdSum').textContent=bigDaySum(day,0)},1000);
-function loadDay(value){if(!value)return;if(value!==day)showTaskInput(false);dateSwipe=null;clearSlide();day=value;slots=read('.'+day)||Array(48).fill(null);$('date').value=day;$('dateLabel').textContent=formatDayFull(day);render();if(!calendarPanel.hidden)renderCalendar()}
+setInterval(()=>{if(!compactMode||document.hidden||exampleMode)return;const el=$('bigDay');if(el&&dateKey(new Date())===day)el.querySelector('.bdSum').textContent=bigDaySum(day,0)},1000);
+function loadDay(value){if(!value)return;if(exampleMode&&value!==day){exampleMode=false;document.documentElement.classList.remove('example')}if(value!==day)showTaskInput(false);dateSwipe=null;clearSlide();day=value;slots=read('.'+day)||Array(48).fill(null);$('date').value=day;$('dateLabel').textContent=formatDayFull(day);render();if(!calendarPanel.hidden)renderCalendar()}
 function updateNowLine(){const g=$('grid');let l=$('nowLine');if(!l){l=node('div','');l.id='nowLine';l.setAttribute('aria-hidden','true');l.append(node('span','NOW'));g.append(l)}const now=new Date();l.hidden=day!==dateKey(now);g.style.setProperty('--nowh',String(now.getHours()))}
+
+/* ===== example day for brand-new users ===== */
+const EX_P=["#fa8040","#568999","#789449","#f6a0a6","#f5c54b","#ad83ba","#ed5b57"];
+const EXAMPLE_DATA=(()=>{const d=Array(48).fill(null),put=(a,b,name,c)=>{for(let i=a;i<b;i++)d[i]={name,color:EX_P[c]}};
+ put(0,14,'수면',1);put(14,16,'아침 준비',4);put(16,18,'출근',5);put(18,24,'집중 업무',0);put(24,26,'점심',3);put(26,31,'회의',2);put(31,36,'메일·정리',4);put(36,38,'퇴근',5);put(38,40,'저녁',3);put(40,42,'운동',6);put(42,45,'독서',2);put(45,48,'휴식',1);return d})();
+let exampleMode=false;
+function hasRecords(){for(let i=0;i<records.length;i++){const k=records.key(i);if(k.startsWith(uid+'.')&&validDay(k.slice(uid.length+1))){try{if((JSON.parse(records.getItem(k))||[]).some(Boolean))return true}catch{}}}return false}
+function canShowExample(){return day===dateKey(new Date())&&!hasRecords()}
+function enterExample(){exampleMode=true;document.documentElement.classList.add('example');if(!compactMode){compactMode=true;applyCompact()}render()}
+function exitExample(toNormal=true){exampleMode=false;document.documentElement.classList.remove('example');if(toNormal&&compactMode){compactMode=false;applyCompact()}render()}
 function markNowHour(grid,key){const now=new Date(),on=key===dateKey(now);grid.querySelectorAll('.hour').forEach((h,i)=>h.classList.toggle('now',on&&i===now.getHours()))}
 setInterval(()=>{if(!document.hidden){markNowHour($('grid'),day);fillDayInfo(document,day,slots);updateNowLine()}},30000);
 function render(data=slots,buttons=cells,chart=$('ring')){
- if(buttons===cells){fillBigDay(document,day,data);fillDayInfo(document,day,data);markNowHour($('grid'),day);updateNowLine()}
+ if(buttons===cells&&exampleMode){if(hasRecords()){exampleMode=false;document.documentElement.classList.remove('example')}else data=EXAMPLE_DATA}
+ if(buttons===cells){fillBigDay(document,day,data);fillDayInfo(document,day,data);markNowHour($('grid'),day);updateNowLine();if(exampleMode){const sm=document.querySelector('#bigDay .bdSum');if(sm)sm.textContent='EXAMPLE\nSWIPE ←'}}
  const stops=[];
  data.forEach((s,i)=>{
   const b=buttons[i],joined=same(s,data[i-1]);b.textContent='';if(!(i%2))b.previousElementSibling?.classList.toggle('onBlock',Boolean(s));b.classList.toggle('joined',!!(i%2&&joined));b.classList.toggle('recorded',Boolean(s));b.style.backgroundColor=s?blockColor(s.color):'';b.style.setProperty('--c',s?blockColor(s.color):'transparent');b.style.color=blockInk();
@@ -703,8 +722,11 @@ function renderCalendar(){
  const selected=new Date(day+'T12:00'),start=new Date(selected);start.setDate(selected.getDate()-selected.getDay());
  const end=new Date(start);end.setDate(start.getDate()+6);
  const M=d=>['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'][d.getMonth()];
- const thu=new Date(start);thu.setDate(start.getDate()+4);const jan1=new Date(thu.getFullYear(),0,1);
- $('monthTitle').textContent=M(thu)+' W'+String(Math.ceil(((thu-jan1)/864e5+1)/7)).padStart(2,'0')+' '+thu.getFullYear();
+ const thu=new Date(start);thu.setDate(start.getDate()+4);const jan1=new Date(thu.getFullYear(),0,1,12);
+ const wkOf=d=>{const st=new Date(d);st.setDate(d.getDate()-d.getDay());const th=new Date(st);th.setDate(st.getDate()+4);return Math.floor(Math.round((th-new Date(th.getFullYear(),0,1,12))/864e5)/7)+1};
+ const total=wkOf(new Date(thu.getFullYear(),11,28,12));
+ $('monthTitle').textContent=M(thu)+' '+thu.getFullYear();
+ $('weekInfo').textContent='W'+String(Math.floor(Math.round((thu-jan1)/864e5)/7)+1).padStart(2,'0')+'/'+total;
  $('weekDate').value=day;
  const days=$('monthDays');days.replaceChildren();
  for(let n=0;n<7;n++){
@@ -758,7 +780,7 @@ document.addEventListener('keydown',e=>{
  if(e.defaultPrevented||e.metaKey||e.ctrlKey||e.altKey||typing(e.target)||document.querySelector('dialog[open]'))return;
  const onTable=!$('table').hidden,onCal=!calendarPanel.hidden;
  if(e.key==='ArrowLeft'||e.key==='ArrowRight'){const dir=e.key==='ArrowRight'?1:-1;if(onTable){e.preventDefault();stepDay(dir)}else if(onCal){e.preventDefault();shiftWeek(dir)}}
- else if((e.key==='z'||e.key==='Z')&&onTable&&!e.repeat){e.preventDefault();setCompact(!compactMode)}
+ else if((e.key==='z'||e.key==='Z')&&onTable&&!e.repeat&&!exampleMode){e.preventDefault();setCompact(!compactMode)}
 });
 {let acc=0,idle=null,cool=0;
  window.addEventListener('wheel',e=>{
@@ -939,8 +961,12 @@ function clearSlide(){
 function previewDay(direction){
  if(slide?.direction===direction)return;
  clearSlide();
+ let toExample=false,fromExample=false;
+ if(exampleMode&&direction<0)return;
+ if(exampleMode)fromExample=true;
+ else if(direction<0&&canShowExample())toExample=true;
  const date=new Date(day+'T12:00');
- date.setDate(date.getDate()+direction);
+ if(!toExample&&!fromExample)date.setDate(date.getDate()+direction);
  const key=dateKey(date);
  const preview=page.cloneNode(true);
  preview.classList.add('dayPreview');
@@ -952,12 +978,12 @@ function previewDay(direction){
  for(const el of preview.querySelectorAll('[id]')){
   el.classList.add('preview-'+el.id);el.removeAttribute('id');
  }
- const pdata=read('.'+key)||Array(48).fill(null);render(pdata,preview.querySelectorAll('.cell'),chart);fillBigDay(preview,key,pdata);fillDayInfo(preview,key,pdata);markNowHour(preview,key);
+ const pdata=toExample?EXAMPLE_DATA:(read('.'+key)||Array(48).fill(null));render(pdata,preview.querySelectorAll('.cell'),chart);fillBigDay(preview,key,pdata);fillDayInfo(preview,key,pdata);markNowHour(preview,key);if(toExample){const sm=preview.querySelector('.preview-bigDay .bdSum');if(sm)sm.textContent='EXAMPLE\nSWIPE ←'}
  stage.append(preview);
  const pad=getComputedStyle(stage).paddingLeft;preview.style.left=pad;preview.style.right='auto';preview.style.width=page.getBoundingClientRect().width+'px';
  layoutLabels(preview.querySelector('.preview-grid'));
  stage.classList.add('sliding');
- slide={direction,key,preview,width:Math.max(stage.getBoundingClientRect().width,page.getBoundingClientRect().width+24)+8};
+ slide={direction,key,preview,toExample,fromExample,width:Math.max(stage.getBoundingClientRect().width,page.getBoundingClientRect().width+24)+8};
 }
 function positionSlide(dx){
  const offset=Math.max(-slide.width,Math.min(slide.width,dx));
@@ -971,7 +997,7 @@ function settleSlide(commit){
  const finish=()=>{
   if(slide!==current)return;
   clearSlide();
-  if(commit)loadDay(current.key);
+  if(commit){if(current.toExample)enterExample();else if(current.fromExample)exitExample();else loadDay(current.key)}
  };
  if(matchMedia('(prefers-reduced-motion: reduce)').matches){finish();return}
  page.style.transition=current.preview.style.transition='transform 180ms ease-out';
@@ -1170,7 +1196,7 @@ function applyCompact(){
   settleLabels(grid);
  });
 }
-function setCompact(on){
+function setCompact(on){if(!on&&exampleMode){exampleMode=false;document.documentElement.classList.remove('example');render()}
  if(compactMode===on)return;compactMode=on;applyCompact();
  try{localStorage.setItem(HINT_KEY,'done')}catch{}
  hidePinchHint();
@@ -1299,6 +1325,7 @@ $('backupFile').onchange=async e=>{
  finally{e.target.value=''}
 };
 
+setTimeout(()=>{if(canShowExample())enterExample()},0);
 function preventPinch(event){
  if(event.cancelable)event.preventDefault();
 }
