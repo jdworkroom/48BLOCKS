@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><meta name="theme-color" content="#ffffff"><title>48BLOCKS</title><style>@font-face{font-family:"Geist Mono";font-weight:400;font-style:normal;font-display:swap;src:url("fonts/geist-mono-latin-400-normal.woff2") format("woff2")}@font-face{font-family:"Geist Mono";font-weight:700;font-style:normal;font-display:swap;src:url("fonts/geist-mono-latin-700-normal.woff2") format("woff2")}</style><script>try{var t=localStorage.getItem("haru-blocks.theme")||"system";document.documentElement.dataset.theme=t==="dark"||(t==="system"&&matchMedia("(prefers-color-scheme: dark)").matches)?"dark":"light"}catch(e){}</script><style>@font-face{font-family:"Pretendard Variable";font-weight:45 920;font-style:normal;font-display:swap;src:url("fonts/PretendardVariable.woff2") format("woff2-variations"),url("fonts/PretendardVariable.woff2") format("woff2")}</style><style>*{box-sizing:border-box}
+<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="48BLOCKS"><link rel="apple-touch-icon" href="icon-180.png"><link rel="icon" type="image/png" href="icon-180.png"><meta name="theme-color" content="#ffffff"><title>48BLOCKS</title><style>@font-face{font-family:"Geist Mono";font-weight:400;font-style:normal;font-display:swap;src:url("fonts/geist-mono-latin-400-normal.woff2") format("woff2")}@font-face{font-family:"Geist Mono";font-weight:700;font-style:normal;font-display:swap;src:url("fonts/geist-mono-latin-700-normal.woff2") format("woff2")}</style><script>try{var t=localStorage.getItem("haru-blocks.theme")||"system";document.documentElement.dataset.theme=t==="dark"||(t==="system"&&matchMedia("(prefers-color-scheme: dark)").matches)?"dark":"light"}catch(e){}</script><style>@font-face{font-family:"Pretendard Variable";font-weight:45 920;font-style:normal;font-display:swap;src:url("fonts/PretendardVariable.woff2") format("woff2-variations"),url("fonts/PretendardVariable.woff2") format("woff2")}</style><style>*{box-sizing:border-box}
 body{margin:0;font:16px/1.45 "Inter","Malgun Gothic",sans-serif}
 button,input{font:inherit}
 button{cursor:pointer;border:0;background:#f1f1ee;border-radius:9px;padding:9px 14px;font-weight:450}
@@ -406,6 +406,11 @@ dialog#todoSheet::backdrop{background:var(--paper)}
 #todoSheet footer{margin-top:0!important}
 #todoSheet .namePanel{min-height:140px;padding-top:calc(26px + env(safe-area-inset-top,0px))}
 #todoPick{display:block!important}
+
+/* example week */
+#calendar .exampleTodo{pointer-events:none}
+/* Safari's see-through toolbar: keep paper colour below the bottom bar */
+.bottomBar::after{content:"";position:absolute;left:0;right:0;top:100%;height:50vh;background:var(--paper);pointer-events:none}
 </style></head><body><div class="dayStage"><div class="page"><header class="dayHeader"><h1><label class="dayPicker"><span id="dateLabel"></span><span id="bigDay" aria-hidden="true"><b class="bdNum"></b><span class="bdMeta"></span><span class="bdSum"></span></span><input type="date" id="date" aria-label="날짜 선택"></label></h1><span id="dayInfo" class="dayInfo" aria-live="off"></span></header><p id="notice" role="status" hidden></p><main><section class="sheet"><section id="calendar" hidden><div class="monthBar"><label class="weekPicker"><h2 id="monthTitle"></h2><input type="date" id="weekDate" aria-label="날짜로 이동"></label><span id="weekInfo" class="dayInfo"></span></div><div id="monthDays" class="weekDays" aria-label="이번 주 날짜 선택"></div><section class="agenda"><div class="agendaHead"><h3 id="todoHead">TO DO</h3><button id="addTodo" type="button" aria-label="할 일 추가" aria-haspopup="dialog">+</button></div><ul id="todoList"></ul></section></section><div id="table"><div id="grid"><div id="selection" hidden></div></div></div><section id="projects" hidden aria-labelledby="prjTitle"><button type="button" class="prjHead" id="prjHead" aria-label="집계 기간 바꾸기"><h2 id="prjTitle">PROJECTS</h2><span id="prjInfo" class="dayInfo"></span></button><div id="prjChart" aria-hidden="true"></div><ul id="prjList"></ul></section><section id="settings" hidden aria-labelledby="settingsTitle"><h2 id="settingsTitle">SETTINGS</h2><section class="setGroup"><h3>THEME</h3><div class="themeRow" role="radiogroup" aria-label="테마"><button type="button" role="radio" data-theme-choice="system">SYSTEM</button><button type="button" role="radio" data-theme-choice="light">LIGHT</button><button type="button" role="radio" data-theme-choice="dark">DARK</button></div></section><section class="setGroup"><h3>STORAGE</h3><p id="syncStatus" class="setNote" role="status">저장 방식을 확인하고 있어요.</p></section><section class="setGroup"><h3>BACKUP</h3><p class="setNote setLead">모든 기록을 파일로 저장하고, 다시 불러올 수 있어요.</p><button type="button" id="download" class="setRow"><b>내보내기</b><i aria-hidden="true">↓</i></button><button type="button" id="upload" class="setRow"><b>불러오기</b><i aria-hidden="true">↑</i></button><input id="backupFile" type="file" accept=".json,application/json" hidden></section></section></section></main></div></div><nav class="bottomBar" aria-label="보기 전환"><div class="tabs"><button id="calendarBtn" title="캘린더" aria-label="캘린더"></button><button id="tableBtn" title="표" aria-label="표"></button><button id="projectsBtn" aria-label="프로젝트" title="프로젝트"></button><button id="settingsBtn" aria-label="설정" title="설정"></button></div></nav><dialog id="todoSheet" aria-labelledby="todoHeading"><form><div class="sheetHandle" aria-hidden="true"></div><div class="sheetBody"><div class="namePanel" id="todoPanel"><div class="sheetHead"><h2 id="todoHeading"></h2><button type="button" id="todoDel" aria-label="할 일 삭제" hidden><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13M10 11v6M14 11v6"/></svg></button></div><label for="todoText" class="fieldLabel srOnly">할 일</label><input id="todoText" maxlength="200" autocomplete="off" placeholder="무엇을 할까요?"></div><div class="prjPickHead" id="todoPickLabel">PROJECT</div><div id="todoPick" role="radiogroup" aria-labelledby="todoPickLabel"></div></div><footer><button type="button" id="todoCancel">취소</button><button type="button" id="todoSave">추가</button></footer></form></dialog><dialog id="prjSheet" aria-labelledby="prjHeading"><form><div class="sheetHandle" aria-hidden="true"></div><div class="sheetBody"><div class="namePanel" id="prjPanel"><div class="sheetHead"><h2 id="prjHeading" tabindex="-1">NEW PROJECT</h2><span class="headRight"><span id="prjCount"></span><button type="button" id="prjDel" aria-label="프로젝트 삭제" hidden><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13M10 11v6M14 11v6"/></svg></button></span></div><label for="prjName" class="fieldLabel srOnly">프로젝트 이름</label><input id="prjName" maxlength="40" autocomplete="off" placeholder="프로젝트 이름"></div><div class="prjPickHead" aria-hidden="true">COLOR</div><span class="fieldLabel srOnly">색상</span><div id="prjColors"></div><div class="colorHead"><button type="button" id="prjCustomBtn">CUSTOM +</button></div></div><footer><button type="button" id="prjCancel">취소</button><button type="button" id="prjSave">만들기</button></footer></form></dialog><dialog id="alertBox" aria-labelledby="alertText"><p id="alertText"></p><div class="alertActions"><button type="button" id="alertOk">확인</button></div></dialog><dialog id="editor" aria-labelledby="heading"><form><div class="sheetHandle" aria-hidden="true"></div><div class="sheetBody"><h2 id="heading" class="srOnly" tabindex="-1">활동 등록</h2><div class="namePanel" id="namePanel"><div class="sheetHead"><p id="range"></p><span class="headRight"><span id="duration"></span><button type="button" id="del" aria-label="이 블록 삭제"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13M10 11v6M14 11v6"/></svg></button></span></div><label for="name" class="fieldLabel srOnly">활동 이름</label><input id="name" maxlength="60" autocomplete="off" placeholder="무엇을 했나요?"></div><div class="prjPickHead" id="prjPickLabel">PROJECT</div><div id="prjPick" role="radiogroup" aria-labelledby="prjPickLabel"></div></div><footer><button type="button" id="cancel">취소</button><button type="button" id="save">저장</button></footer></form></dialog><div id="pinchHint" role="status" hidden><span>두 손가락으로 모아 한눈에 보기</span></div><div id="toast" role="status" hidden><span id="toastText"></span><button type="button" id="undo">되돌리기</button></div><script>'use strict';
 // a sheet opened by a long press must not take the finger-lift "click" as a tap on whatever is under it
 function guardGhostTap(d){
@@ -588,6 +593,18 @@ function updateNowLine(){const g=$('grid');let l=$('nowLine');if(!l){l=node('div
 const EXAMPLE_DATA=(()=>{const d=Array(48).fill(null),put=(a,b,name,c)=>{for(let i=a;i<b;i++)d[i]={name,color:palette[c]}};
  put(1,16,'수면',1);put(17,19,'샤워 및 준비',5);put(19,20,'메일 확인, 할 일 정리',2);put(20,24,'디자인 시안 작업',0);put(24,26,'점심식사',3);put(26,29,'디자인 시안 작업',0);put(32,37,'바이브 코딩 사이드 프로젝트',4);put(37,38,'퇴근 / 장보기',2);put(40,42,'저녁식사',3);put(42,44,'운동',6);put(44,45,'영어 공부',4);return d})();
 let exampleMode=false;
+// example week for the calendar (index = weekday, Sun..Sat); today shows the example day, later days stay empty
+const EXAMPLE_WEEK=[
+ [[3,19,'수면',1],[21,23,'아침 겸 점심',3],[24,30,'사이드 프로젝트',4],[31,33,'산책',2],[36,40,'영화',5],[40,42,'저녁식사',3],[44,47,'독서',4]],
+ [[2,15,'수면',1],[16,18,'샤워 및 준비',5],[19,20,'메일 확인',2],[20,26,'디자인 시안 작업',0],[26,28,'점심식사',3],[28,32,'디자인 시안 작업',0],[35,37,'운동',6],[39,41,'저녁식사',3],[42,45,'사이드 프로젝트',4]],
+ [[0,15,'수면',1],[16,18,'샤워 및 준비',5],[18,19,'메일 확인',2],[19,25,'디자인 시안 작업',0],[25,27,'점심식사',3],[27,31,'디자인 시안 작업',0],[33,36,'사이드 프로젝트',4],[38,40,'저녁식사',3],[41,43,'운동',6]],
+ [[2,16,'수면',1],[17,19,'샤워 및 준비',5],[20,24,'디자인 시안 작업',0],[24,26,'점심식사',3],[26,30,'디자인 시안 작업',0],[30,31,'회의',2],[34,38,'사이드 프로젝트',4],[40,42,'저녁식사',3],[44,46,'영어 공부',4]],
+ [[1,15,'수면',1],[16,18,'샤워 및 준비',5],[18,19,'메일 확인',2],[19,23,'디자인 시안 작업',0],[23,25,'점심식사',3],[27,32,'디자인 시안 작업',0],[36,38,'저녁식사',3],[38,40,'운동',6]],
+ [[1,16,'수면',1],[17,19,'샤워 및 준비',5],[19,20,'메일 확인',2],[20,24,'디자인 시안 작업',0],[24,26,'점심식사',3],[28,33,'디자인 시안 작업',0],[34,36,'사이드 프로젝트',4],[40,42,'저녁식사',3]],
+ [[3,18,'수면',1],[20,22,'아침 겸 점심',3],[24,28,'장보기',2],[30,34,'친구 만나기',5],[38,41,'사이드 프로젝트',4]]
+].map(runs=>{if(!runs)return null;const d=Array(48).fill(null);for(const [a,b,name,c] of runs)for(let i=a;i<b;i++)d[i]={name,color:palette[c]};return d});
+const EXAMPLE_TODOS=[['포트폴리오 정리',2,false],['장보기',3,false],['영어 단어 30개',4,false],['시안 피드백 반영',0,true]];
+function exampleDayData(key){const today=dateKey(new Date());if(key>today)return Array(48).fill(null);if(key===today)return EXAMPLE_DATA;return EXAMPLE_WEEK[new Date(key+'T12:00').getDay()]||EXAMPLE_DATA}
 function hasRecords(){let found=false;eachDay((d,a)=>{if(a.some(Boolean))found=true});return found}
 function canShowExample(){return day===dateKey(new Date())&&!hasRecords()}
 function enterExample(){exampleMode=true;document.documentElement.classList.add('example');render();$('pinchHint').hidden=false}
@@ -663,11 +680,13 @@ function renderCalendar(){
  const end=new Date(start);end.setDate(start.getDate()+6);
  const thu=new Date(start);thu.setDate(start.getDate()+4);
  $('monthTitle').textContent=MON3[thu.getMonth()]+' '+thu.getFullYear();
- $('weekInfo').textContent='W'+String(weekNo(selected)).padStart(2,'0')+'/'+weekNo(new Date(thu.getFullYear(),11,28,12));
+ const today=dateKey(new Date()),exWeek=!hasRecords()&&dateKey(start)<=today&&today<=dateKey(end);
+ calendarPanel.classList.toggle('exampleWeek',exWeek);
+ $('weekInfo').textContent=exWeek?'EXAMPLE':'W'+String(weekNo(selected)).padStart(2,'0')+'/'+weekNo(new Date(thu.getFullYear(),11,28,12));
  $('weekDate').value=day;
  const days=$('monthDays');days.replaceChildren();
  for(let n=0;n<7;n++){
-  const d=new Date(start);d.setDate(start.getDate()+n);const key=dateKey(d),data=read('.'+key)||Array(48).fill(null);
+  const d=new Date(start);d.setDate(start.getDate()+n);const key=dateKey(d),data=exWeek?exampleDayData(key):(read('.'+key)||Array(48).fill(null));
   const button=node('button','');button.type='button';button.className='weekDay';
   const wd=node('span','SMTWTFS'[n]);wd.className='wdName';
   const num=node('b',String(d.getDate()));num.className='wdNum';
@@ -678,8 +697,13 @@ function renderCalendar(){
   button.setAttribute('aria-label',key+' · 기록 '+data.filter(Boolean).length/2+'시간 · 할 일 '+total+'개');
   button.setAttribute('aria-pressed',key===day);button.onclick=()=>loadDay(key);days.append(button);
  }
- $('todoHead').textContent='TO DO · '+tasksOn(day).filter(t=>!t.done).length;
  const list=$('todoList');list.replaceChildren();
+ if(exWeek&&day===today&&!tasksOn(day).length){
+  $('todoHead').textContent='TO DO · '+EXAMPLE_TODOS.filter(t=>!t[2]).length;
+  for(const [text,c,done] of EXAMPLE_TODOS){const row=node('li',''),block=node('div','');block.className='todoBlock exampleTodo'+(done?' done':'');block.style.background=palette[c];block.setAttribute('aria-hidden','true');block.append(node('span',text));row.append(block);list.append(row)}
+  return;
+ }
+ $('todoHead').textContent='TO DO · '+tasksOn(day).filter(t=>!t.done).length;
  for(const task of tasksOn(day)){
   const row=node('li',''),block=node('button','');
   const tc=taskColor(task);block.type='button';block.className='todoBlock'+(tc?'':' noColor')+(task.done?' done':'');
@@ -940,7 +964,7 @@ function settleSlide(commit){
  const finish=()=>{
   if(slide!==current)return;
   clearSlide();
-  if(commit){if(current.toExample)enterExample();else if(current.fromExample)exitExample();else loadDay(current.key)}
+  if(commit){if(current.toExample)enterExample();else if(current.fromExample)exitExample(false);else loadDay(current.key)}
  };
  if(matchMedia('(prefers-reduced-motion: reduce)').matches){finish();return}
  page.style.transition=current.preview.style.transition='transform 180ms ease-out';
