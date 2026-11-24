@@ -221,7 +221,7 @@ html.compact,html.compact body{overflow:hidden;overscroll-behavior:none;height:1
 html.compact .page{touch-action:none}
 html .bottomBar{padding:0 0 env(safe-area-inset-bottom,0px)}
 html .bottomBar .tabs{width:100%;justify-items:stretch}
-html .bottomBar .tabs button{display:block;height:46px;color:#8c8c88;text-align:center;padding:0}
+html .bottomBar .tabs button{display:block;height:54px;color:#8c8c88;text-align:center;padding:8px 0 0}
 html .bottomBar .tabs button[aria-pressed=true]{color:var(--ink)}
 html .bottomBar .tabs button::after{font-family:var(--mono);font-weight:700;font-size:10.8px;letter-spacing:0}
 html .bottomBar #calendarBtn{text-align:left;padding-left:12px}
@@ -232,7 +232,7 @@ html .bottomBar #settingsBtn::after{content:"SET"}
 html .bottomBar #calendarBtn[aria-pressed=true]::after{content:"● CAL"}
 html .bottomBar #tableBtn[aria-pressed=true]::after{content:"● DAY"}
 html .bottomBar #settingsBtn[aria-pressed=true]::after{content:"● SET"}
-html:not(.compact) .bottomBar .tabs button{height:60px}
+html:not(.compact) .bottomBar .tabs button{height:70px;padding-top:10px}
 html:not(.compact) .bottomBar .tabs button::after{font-size:15px}
 html:not(.compact) .bottomBar #calendarBtn{padding-left:16px}
 html:not(.compact) .bottomBar #settingsBtn{padding-right:16px}
@@ -413,9 +413,9 @@ dialog#todoSheet::backdrop{background:var(--paper)}
    so nothing but paper ever sits behind the browser toolbar */
 html,body{height:100%;overflow:hidden;background:var(--paper)}
 body{margin:0}
-#scroller{position:fixed;inset:0 0 calc(60px + env(safe-area-inset-bottom,0px)) 0;box-sizing:border-box;overflow-x:hidden;overflow-y:auto;overscroll-behavior:none;scrollbar-width:none}
+#scroller{position:fixed;inset:0 0 calc(70px + env(safe-area-inset-bottom,0px)) 0;box-sizing:border-box;overflow-x:hidden;overflow-y:auto;overscroll-behavior:none;scrollbar-width:none}
 #scroller::-webkit-scrollbar{display:none}
-html.compact #scroller{bottom:calc(46px + env(safe-area-inset-bottom,0px));overflow:hidden}
+html.compact #scroller{bottom:calc(54px + env(safe-area-inset-bottom,0px));overflow:hidden}
 .page{padding-bottom:44px}
 
 /* bottom bar labels sit a little lower, away from the content edge */
@@ -513,7 +513,7 @@ function applyExternal(keys){
  if(!$('projects').hidden)renderProjects();
 }
 function finishLocalOnly(){
- setSyncStatus('local');
+ setSyncStatus('local');seedProjects();
  if(!local)notifyUser('이 화면은 기록을 임시로 보관해요. 닫기 전에 설정의 백업 다운로드로 보관해 주세요.');
 }
 async function connectCloud(){
@@ -537,7 +537,7 @@ async function connectCloud(){
     first=false;clearTimeout(timer);cloud={col};
     const remote=new Set(snap.docs.map(d=>d.id));
     for(const [key,value] of cache){const id=docIdFor(key);if(id&&(!remote.has(id)||dirty.has(id)))pendingSync.set(id,value)}
-    dirty.clear();setSyncStatus('cloud');pumpSync();
+    dirty.clear();setSyncStatus('cloud');seedProjects();pumpSync();
    }
    if(changed.length)applyExternal(changed);
   },()=>{clearTimeout(timer);cloud=null;finishLocalOnly()});
@@ -1177,6 +1177,13 @@ function openPrjSheet(p,done){
  $('prjSave').disabled=!$('prjName').value.trim();
  $('prjSheet').showModal();fitSheet();
  if(p)$('prjHeading').focus();else $('prjName').focus();
+}
+// starter projects: added once, only after storage is known to hold no project list at all
+// (never before the account copy has loaded, so another device's projects are not overwritten)
+const DEFAULT_PROJECTS=[['def-work','업무',0],['def-study','공부',4],['def-workout','운동',6],['def-daily','일상',2]];
+function seedProjects(){
+ if(records.getItem(uid+'.projects')!==null)return;
+ saveProjects(DEFAULT_PROJECTS.map(([id,name,c])=>({id,name,color:palette[c]})));afterProjectsChange();
 }
 function afterProjectsChange(){
  if($('editor').open){renderPrjPick();setProject(edPrj)}else render();
