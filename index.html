@@ -619,7 +619,7 @@ function updateNowLine(){const g=$('grid');let l=$('nowLine');if(!l){l=node('div
 /* ===== example day for brand-new users ===== */
 const EX_P=["#fa8040","#568999","#789449","#f6a0a6","#f5c54b","#ad83ba","#ed5b57"];
 const EXAMPLE_DATA=(()=>{const d=Array(48).fill(null),put=(a,b,name,c)=>{for(let i=a;i<b;i++)d[i]={name,color:EX_P[c]}};
- put(1,13,'수면',1);put(14,15,'아침',4);put(17,18,'출근',5);put(18,22,'집중 업무',0);put(24,25,'점심',3);put(27,30,'회의',2);put(31,33,'메일 정리',4);put(37,38,'저녁',3);put(39,41,'운동',6);put(42,44,'독서',2);put(46,48,'휴식',1);return d})();
+ put(1,16,'수면',1);put(17,19,'샤워 및 준비',5);put(19,20,'메일 확인, 할 일 정리',2);put(20,24,'디자인 시안 작업',0);put(24,26,'점심식사',3);put(26,29,'디자인 시안 작업',0);put(32,37,'바이브 코딩 사이드 프로젝트',4);put(37,38,'퇴근 / 장보기',2);put(40,42,'저녁식사',3);put(42,44,'운동',6);put(44,45,'영어 공부',4);return d})();
 let exampleMode=false;
 function hasRecords(){for(let i=0;i<records.length;i++){const k=records.key(i);if(k.startsWith(uid+'.')&&validDay(k.slice(uid.length+1))){try{if((JSON.parse(records.getItem(k))||[]).some(Boolean))return true}catch{}}}return false}
 function canShowExample(){return day===dateKey(new Date())&&!hasRecords()}
